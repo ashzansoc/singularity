@@ -1,0 +1,32 @@
+{
+  "project": "qwen-testin3",
+  "label": "baseline-pre-design-intelligence",
+  "capturedAt": "2026-08-09",
+  "notes": "Preserve pre-pipeline LaunchPad output for benchmarking. Do not hand-edit this snapshot as the 'improved' result — re-run via Design Intelligence pipeline.",
+  "observedAesthetic": [
+    "dark zinc backgrounds",
+    "blue-purple gradients",
+    "Lucide icon feature cards",
+    "generic Three.js / MeshDistort heroes",
+    "Framer fade-ins",
+    "Geist/Inter-style defaults",
+    "generic AI copy"
+  ],
+  "metrics": {
+    "sourceFileCount": 13,
+    "modelCalls": null,
+    "tokenUsage": null,
+    "generationTime": null,
+    "visualCriticScore": null,
+    "genericness": null,
+    "brandDistinctiveness": null,
+    "productCommunication": null
+  },
+  "compareAfter": {
+    "genericness": "target ≤ 35",
+    "brandDistinctiveness": "target ≥ 65",
+    "productCommunication": "target ≥ 65",
+    "refinementIterations": "≤ 3",
+    "signatureElement": "required product-specific visual"
+  }
+}

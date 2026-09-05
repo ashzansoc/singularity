@@ -1,0 +1,46 @@
+{
+  "suite": "token-compare-v1",
+  "description": "Fixed prompts for A/B token measurement (Singularity engines off/on + Cursor manual).",
+  "prompts": [
+    {
+      "id": "greet",
+      "category": "chat",
+      "text": "Hi — briefly say what you can help with in this repo."
+    },
+    {
+      "id": "explain-auth",
+      "category": "explain",
+      "text": "Explain how authentication works in this codebase in 8 bullet points. If unsure, say what files you'd open first."
+    },
+    {
+      "id": "explain-auth-repeat",
+      "category": "explain-repeat",
+      "text": "Explain how authentication works in this codebase in 8 bullet points. If unsure, say what files you'd open first."
+    },
+    {
+      "id": "small-fix",
+      "category": "code",
+      "text": "Write a TypeScript helper `clamp(n, min, max)` with JSDoc. No extra prose."
+    },
+    {
+      "id": "small-fix-tweak",
+      "category": "code-followup",
+      "text": "Same clamp helper, but also export a `clamp01(n)` that clamps to [0, 1]."
+    },
+    {
+      "id": "debug",
+      "category": "debug",
+      "text": "Given `TypeError: Cannot read properties of undefined (reading 'map')` in a React list render, list the top 5 likely causes and how to verify each."
+    },
+    {
+      "id": "refactor",
+      "category": "refactor",
+      "text": "Outline a safe plan to rename `UserService` to `AccountService` across a medium TypeScript monorepo (steps + risks)."
+    },
+    {
+      "id": "frontend",
+      "category": "frontend",
+      "text": "Design a minimal settings page layout for a SaaS app: sections, hierarchy, and what NOT to put in the hero. No code."
+    }
+  ]
+}

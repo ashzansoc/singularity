@@ -1,0 +1,13 @@
+Singularity — how to open on macOS
+====================================
+
+If macOS says the app is "damaged", that is Gatekeeper (not a bad file).
+
+1. Open the DMG and drag Singularity.app into Applications.
+2. Paste these three lines into Terminal (no extra comments):
+
+xattr -cr /Applications/Singularity.app
+xattr -dr com.apple.quarantine /Applications/Singularity.app
+open /Applications/Singularity.app
+
+Do not open Singularity from inside the disk image.

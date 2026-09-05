@@ -1,0 +1,23 @@
+{
+  "note": "Fill after running the same prompts.json suite in Cursor Agent/Chat. Copy to cursor-results.json.",
+  "source": "Cursor Settings → Usage / per-chat usage if shown",
+  "model": "cursor-auto-or-named-model",
+  "totals": {
+    "calls": 8,
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "cachedTokens": 0,
+    "freshInputTokens": 0,
+    "totalTokens": 0
+  },
+  "rows": [
+    { "id": "greet", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "explain-auth", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "explain-auth-repeat", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "small-fix", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "small-fix-tweak", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "debug", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "refactor", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 },
+    { "id": "frontend", "promptTokens": 0, "cachedTokens": 0, "completionTokens": 0 }
+  ]
+}

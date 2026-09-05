@@ -1,0 +1,37 @@
+{
+  "name": "@singularity/neural-relay",
+  "version": "0.1.0",
+  "description": "Experimental Neural Relay — fast context intelligence for minimum-sufficient DeepSeek context",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "benchmark": "npx tsx benchmark/harness.ts",
+    "benchmark:live": "npx tsx benchmark/harness.ts --live",
+    "acceptance": "npx tsx benchmark/harness.ts --acceptance"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "license": "MIT"
+}

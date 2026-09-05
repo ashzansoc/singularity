@@ -1,0 +1,10 @@
+{
+  "name": "@singularity/project-intelligence",
+  "private": true,
+  "type": "module",
+  "description": "Standalone Context Intelligence daemon",
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "tsc -p tsconfig.json"
+  }
+}

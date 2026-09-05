@@ -1,0 +1,13 @@
+/Users/ashutosh/qwen-testin3/src/app/api/waitlist/route.ts
+/Users/ashutosh/qwen-testin3/src/app/globals.css
+/Users/ashutosh/qwen-testin3/src/app/layout.tsx
+/Users/ashutosh/qwen-testin3/src/app/page.tsx
+/Users/ashutosh/qwen-testin3/src/components/canvas/HeroCanvas.tsx
+/Users/ashutosh/qwen-testin3/src/components/layout/Footer.tsx
+/Users/ashutosh/qwen-testin3/src/components/layout/Navbar.tsx
+/Users/ashutosh/qwen-testin3/src/components/magic/animated-components.tsx
+/Users/ashutosh/qwen-testin3/src/components/sections/Features.tsx
+/Users/ashutosh/qwen-testin3/src/components/sections/Hero.tsx
+/Users/ashutosh/qwen-testin3/src/components/sections/Waitlist.tsx
+/Users/ashutosh/qwen-testin3/src/components/ui/button.tsx
+/Users/ashutosh/qwen-testin3/src/lib/utils.ts

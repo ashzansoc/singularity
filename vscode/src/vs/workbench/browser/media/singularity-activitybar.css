@@ -1,0 +1,495 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/*
+ * Singularity floating rounded activity nav
+ *
+ * Layout contract (must match ActivitybarPart.SINGULARITY_NAV_*):
+ *   part width = 56 (pill) + 24 (gutters) = 80px
+ *   pill = 56px wide; top gap 8px, bottom gap 2px (stretched down)
+ *   Behind the pill: app black #0F0F0F
+ *   Inside the pill: charcoal #1C1C1C
+ */
+
+/* Kill the default dark workbench charcoal (#252526) so gaps around the pill are black */
+.monaco-workbench.vs-dark {
+	background-color: #0F0F0F !important;
+}
+
+.monaco-workbench {
+	--singularity-nav-column-bg: #0F0F0F;
+	--singularity-nav-pill-bg: #1C1C1C;
+	--singularity-nav-pill-bg-solid: #1C1C1C;
+	--singularity-nav-pill-border: rgba(255, 255, 255, 0.1);
+	--singularity-nav-pill-highlight: transparent;
+	--singularity-nav-pill-shadow: none;
+	--singularity-nav-pill-width: 56px;
+	--singularity-nav-icon-size: 38px;
+	--singularity-nav-gap-x: 12px;
+	--singularity-nav-gap-top: 8px;
+	--singularity-nav-gap-bottom: 2px;
+}
+
+.monaco-workbench.vs {
+	--singularity-nav-column-bg: var(--vscode-sideBar-background, #F3F3F3);
+	--singularity-nav-pill-bg: rgba(255, 255, 255, 0.55);
+	--singularity-nav-pill-bg-solid: #E8E8E8;
+	--singularity-nav-pill-border: rgba(0, 0, 0, 0.1);
+	--singularity-nav-pill-highlight: rgba(255, 255, 255, 0.65);
+	--singularity-nav-pill-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* App-black column behind the pill — override floating-panels transparent */
+.monaco-workbench.floating-panels .part.activitybar.singularity-activitybar,
+.monaco-workbench.floating-panels.top-window-edge .part.activitybar.singularity-activitybar,
+.monaco-workbench .part.activitybar.singularity-activitybar {
+	overflow: visible !important;
+	z-index: 50;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: #0F0F0F !important;
+	background-color: #0F0F0F !important;
+	border: none !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar::before {
+	display: none !important;
+}
+
+/* The floating pill — slight glass over charcoal; stretched toward bottom */
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav {
+	box-sizing: border-box !important;
+	width: var(--singularity-nav-pill-width) !important;
+	min-width: var(--singularity-nav-pill-width) !important;
+	max-width: var(--singularity-nav-pill-width) !important;
+	height: calc(100% - var(--singularity-nav-gap-top) - var(--singularity-nav-gap-bottom)) !important;
+	margin: var(--singularity-nav-gap-top) var(--singularity-nav-gap-x) var(--singularity-nav-gap-bottom) !important;
+	padding: 14px 0 12px !important;
+	border-radius: 8px !important;
+	background:
+		var(--singularity-nav-pill-bg) !important;
+	background-color: var(--singularity-nav-pill-bg) !important;
+	border: 1px solid var(--singularity-nav-pill-border) !important;
+	box-shadow: none !important;
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	overflow: hidden;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 0;
+	isolation: isolate;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav {
+		background: var(--singularity-nav-pill-bg-solid) !important;
+		background-color: var(--singularity-nav-pill-bg-solid) !important;
+	}
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav .singularity-nav-footer {
+	background: transparent !important;
+}
+
+/* Icons-only nav — never expand or show text labels on hover */
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-label,
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-name,
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-plan-text,
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-brand {
+	display: none !important;
+}
+
+/* Hide compact menubar (was the grey band above the logo) */
+.monaco-workbench .part.activitybar.singularity-activitybar .menubar {
+	display: none !important;
+	height: 0 !important;
+	min-height: 0 !important;
+	max-height: 0 !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Icons — 12px gap between items, start at top of pill */
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar {
+	margin-bottom: auto;
+	margin-top: 0;
+	width: 100%;
+}
+
+.monaco-workbench.floating-panels .part.activitybar.singularity-activitybar:not(.compact) > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item + .action-item,
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item + .action-item {
+	margin-top: 12px !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 100%;
+	height: var(--singularity-nav-icon-size);
+	padding: 0;
+	box-sizing: border-box;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-label {
+	width: var(--singularity-nav-icon-size) !important;
+	height: var(--singularity-nav-icon-size) !important;
+	min-width: var(--singularity-nav-icon-size);
+	margin-left: 0 !important;
+	border-radius: 10px !important;
+	flex-shrink: 0;
+	box-sizing: border-box;
+	border: 1px solid transparent !important;
+	font-size: 19px !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item.checked .action-label,
+.monaco-workbench .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item:hover .action-label {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item.checked .active-item-indicator:before {
+	display: none !important;
+}
+
+/* Footer — GitHub profile */
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-footer {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 10px;
+	padding: 12px 0 4px;
+	margin-top: auto;
+	width: 100%;
+	border-top: 1px solid rgba(255, 255, 255, 0.06);
+	flex-shrink: 0;
+	background: transparent !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-footer > .monaco-action-bar {
+	display: none !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile {
+	appearance: none;
+	border: none;
+	background: transparent;
+	padding: 0;
+	margin: 0 auto;
+	width: var(--singularity-nav-icon-size);
+	height: var(--singularity-nav-icon-size);
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-radius: 12px;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile:hover .singularity-nav-profile-avatar {
+	border-color: rgba(255, 255, 255, 0.28);
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-avatar {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	overflow: hidden;
+	position: relative;
+	background: #2A2A2A;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-initials,
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-initials {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	font-weight: 650;
+	letter-spacing: 0.02em;
+	color: #F4F4F5;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-img {
+	object-fit: cover;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-img.hidden {
+	display: none;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-badge {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	min-width: 14px;
+	height: 14px;
+	padding: 0 3px;
+	border-radius: 999px;
+	background: #D4A84B;
+	color: #111;
+	font-size: 9px;
+	font-weight: 700;
+	line-height: 14px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile-badge.hidden {
+	display: none;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-profile.is-expired .singularity-nav-profile-badge {
+	background: #E86D6D;
+	color: #fff;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-plan {
+	display: none !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-plan .singularity-nav-plan-icon {
+	width: var(--singularity-nav-icon-size);
+	height: var(--singularity-nav-icon-size);
+	min-width: var(--singularity-nav-icon-size);
+	margin-left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 19px;
+	border-radius: 10px;
+	flex-shrink: 0;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-plan.is-pro .singularity-nav-plan-icon {
+	color: #d4a84b;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-footer .monaco-action-bar {
+	width: 100%;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-footer .action-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 100%;
+	height: var(--singularity-nav-icon-size);
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .singularity-nav-footer .action-label {
+	width: var(--singularity-nav-icon-size) !important;
+	height: var(--singularity-nav-icon-size) !important;
+	min-width: var(--singularity-nav-icon-size);
+	margin-left: 0 !important;
+	border-radius: 10px !important;
+	font-size: 19px !important;
+}
+
+.monaco-workbench .part.activitybar.singularity-activitybar .profile-badge {
+	display: none !important;
+}
+
+/* Explorer: gap under title before folder row */
+.monaco-workbench .part.sidebar .explorer-folders-view {
+	padding-top: 10px;
+}
+
+.monaco-workbench .part.sidebar .explorer-folders-view .monaco-list-row[aria-level="1"] + .monaco-list-row[aria-level="2"] {
+	margin-top: 6px;
+}
+
+/* Title bar brand — Singularity type wordmark */
+.monaco-workbench .part.titlebar .singularity-title-brand {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	padding: 0 8px 0 4px;
+	height: 100%;
+	max-height: 100%;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	line-height: 0;
+	-webkit-app-region: no-drag;
+	app-region: no-drag;
+	z-index: 2;
+	overflow: visible;
+}
+
+.monaco-workbench .part.titlebar .titlebar-left:has(.singularity-title-brand) {
+	overflow: visible;
+	gap: 8px;
+}
+
+.monaco-workbench .part.titlebar .singularity-title-brand-logo {
+	height: 22px;
+	width: 22px;
+	object-fit: contain;
+	object-position: center center;
+	display: block;
+	pointer-events: none;
+	user-select: none;
+	flex-shrink: 0;
+}
+
+.monaco-workbench .part.titlebar .singularity-title-brand-name {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	line-height: 22px;
+	color: var(--vscode-titleBar-activeForeground);
+	white-space: nowrap;
+	user-select: none;
+}
+
+.monaco-workbench .part.titlebar.inactive .singularity-title-brand-logo,
+.monaco-workbench .part.titlebar.inactive .singularity-title-brand-name {
+	opacity: 0.7;
+}
+
+/* Code | Chat — segmented control beside brand */
+.monaco-workbench .part.titlebar .singularity-mode-switcher {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+	height: 26px;
+	padding: 2px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	flex-shrink: 0;
+	-webkit-app-region: no-drag;
+	app-region: no-drag;
+	z-index: 2;
+}
+
+.monaco-workbench .part.titlebar .singularity-mode-switcher-btn {
+	appearance: none;
+	border: none;
+	margin: 0;
+	padding: 0 12px;
+	height: 22px;
+	border-radius: 6px;
+	background: transparent;
+	color: rgba(255, 255, 255, 0.62);
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	line-height: 22px;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+}
+
+.monaco-workbench .part.titlebar .singularity-mode-switcher-btn:hover:not(.active) {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.monaco-workbench .part.titlebar .singularity-mode-switcher-btn.active {
+	color: #ffffff;
+	background: linear-gradient(90deg, #2f6bff 0%, #3ecf8e 100%);
+	box-shadow:
+		0 0 0 0.5px rgba(255, 255, 255, 0.12),
+		0 4px 14px rgba(47, 107, 255, 0.28);
+}
+
+.monaco-workbench .part.titlebar.inactive .singularity-mode-switcher {
+	opacity: 0.75;
+}
+
+.monaco-workbench.vs .part.titlebar .singularity-mode-switcher {
+	background: rgba(0, 0, 0, 0.04);
+	border-color: rgba(0, 0, 0, 0.1);
+}
+
+.monaco-workbench.vs .part.titlebar .singularity-mode-switcher-btn {
+	color: rgba(0, 0, 0, 0.55);
+}
+
+.monaco-workbench.vs .part.titlebar .singularity-mode-switcher-btn:hover:not(.active) {
+	color: rgba(0, 0, 0, 0.85);
+}
+
+.monaco-workbench.vs .part.titlebar .singularity-mode-switcher-btn.active {
+	color: #ffffff;
+}
+
+/* Open in Agents moved into Code|Chat — hide titlebar/command-adjacent entry */
+.monaco-workbench .open-in-agents-titlebar-widget,
+.monaco-workbench .part.titlebar .center-adjacent-toolbar-container .action-item:has(.open-in-agents-titlebar-widget),
+.monaco-workbench .part.titlebar .center-adjacent-toolbar-container .action-label[aria-label*="Open in Agents"],
+.monaco-workbench .part.titlebar .center-adjacent-toolbar-container .action-label[aria-label*="Agents Window"] {
+	display: none !important;
+}
+
+/* Brand + Code/Chat live in titlebar-left. Hide the centered Search/title so they never overlap. */
+.monaco-workbench .part.titlebar > .titlebar-container.has-center:has(.singularity-mode-switcher) > .titlebar-left {
+	width: auto;
+	flex: 0 0 auto;
+	min-width: min-content;
+	overflow: visible;
+}
+
+.monaco-workbench .part.titlebar > .titlebar-container.has-center:has(.singularity-mode-switcher) > .titlebar-center {
+	display: none;
+}
+
+.monaco-workbench .part.titlebar > .titlebar-container.has-center:has(.singularity-mode-switcher) > .titlebar-right {
+	flex: 1 1 auto;
+	width: auto;
+	min-width: 0;
+}
+
+/* Native mac traffic lights sit over titlebar-left — clear them (matches window-controls width). */
+.monaco-workbench.mac:not(.web):not(.fullscreen) .part.titlebar .titlebar-left .singularity-title-brand {
+	margin-left: 78px;
+	padding-left: 4px;
+}
+
+.monaco-workbench.mac.fullscreen .part.titlebar .titlebar-left .singularity-title-brand {
+	margin-left: 0;
+	padding-left: 8px;
+}
+
+.monaco-workbench.vs .part.activitybar.singularity-activitybar > .content.singularity-nav {
+	background:
+		linear-gradient(180deg, var(--singularity-nav-pill-highlight) 0%, transparent 42%),
+		var(--singularity-nav-pill-bg) !important;
+	background-color: var(--singularity-nav-pill-bg) !important;
+	box-shadow:
+		var(--singularity-nav-pill-shadow),
+		inset 0 1px 0 rgba(255, 255, 255, 0.75),
+		inset 0 0 0 0.5px rgba(255, 255, 255, 0.35) !important;
+}
+
+.monaco-workbench.vs .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item.checked .action-label,
+.monaco-workbench.vs .part.activitybar.singularity-activitybar > .content.singularity-nav > .composite-bar > .monaco-action-bar .action-item:hover .action-label {
+	background: rgba(0, 0, 0, 0.06) !important;
+	border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.monaco-workbench.vs .part.activitybar.singularity-activitybar .singularity-nav-footer {
+	border-top-color: rgba(0, 0, 0, 0.08);
+}

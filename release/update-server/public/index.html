@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Singularity admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@450;500&family=Manrope:wght@400;600;700&family=Syne:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="mark">Singularity · admin</div>
+      <nav class="nav">
+        <a href="/install.html">Install</a>
+        <button type="button" class="linkish hidden" id="sign-out">Sign out</button>
+      </nav>
+    </header>
+
+    <section id="gate" class="hero" style="grid-template-columns:1fr minmax(280px, 380px)">
+      <div>
+        <h1>How the product is used.</h1>
+        <p class="lede">Users, devices, tokens, models. First account to sign in becomes the admin. Data is read from Supabase; this page is Firebase Hosting only.</p>
+      </div>
+      <form class="panel" id="login-form">
+        <h3>Sign in</h3>
+        <p class="lede" style="margin:0">Magic link to this dashboard.</p>
+        <div class="row">
+          <input type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+          <button class="btn btn-primary" type="submit">Send link</button>
+        </div>
+        <p class="note" id="login-note"></p>
+      </form>
+    </section>
+
+    <section id="dash" class="hidden">
+      <p class="who" id="who"></p>
+      <div class="kpis" id="kpis"></div>
+      <div class="split">
+        <div>
+          <h2>Last 30 days</h2>
+          <div class="chart" id="chart"></div>
+        </div>
+        <div>
+          <h2>Models</h2>
+          <div id="models"></div>
+        </div>
+      </div>
+      <h2>Users</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Tokens</th>
+              <th>Requests</th>
+              <th>Devices</th>
+              <th>Last seen</th>
+            </tr>
+          </thead>
+          <tbody id="users"></tbody>
+        </table>
+      </div>
+      <h2>Recent calls</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>User</th>
+              <th>Model</th>
+              <th>Tokens</th>
+            </tr>
+          </thead>
+          <tbody id="recent"></tbody>
+        </table>
+      </div>
+    </section>
+    <footer id="app-version" style="border-top:1px solid var(--border);padding:18px 0 28px;margin-top:32px">
+      Singularity
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
+  <script src="/site.js"></script>
+</body>
+</html>

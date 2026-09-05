@@ -1,0 +1,741 @@
+{
+  "name": "singularity-ai",
+  "displayName": "Singularity AI",
+  "description": "Boots Singularity routing + AI I/O caching when the IDE launches",
+  "version": "0.1.0",
+  "publisher": "singularity",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:singularity.brain.open",
+    "onCommand:singularity.ai.intelligence.open",
+    "onCommand:singularity.ai.memory.open",
+    "onCommand:singularity.ai.architecture.open",
+    "onCommand:singularity.ai.tasks.open",
+    "onCommand:singularity.brain.syncEverything",
+    "onCommand:singularity.ai.recordUsage",
+    "onCommand:singularity.ai.setRequestPhase",
+    "onCommand:singularity.ai.cacheTelemetry",
+    "onCommand:singularity.ai.runRuntime",
+    "onCommand:singularity.ai.openDesignPreview",
+    "onCommand:singularity.ai.runDesignPreviewGate",
+    "onCommand:singularity.ai.startPenpot",
+    "onChatParticipant:singularity.dag"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "node ./esbuild.mjs",
+    "watch": "node ./esbuild.mjs --watch",
+    "compile": "npm run build"
+  },
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "cobuild",
+        "displayName": "Singularity Cobuild"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "singularity.dag",
+        "fullName": "Singularity DAG",
+        "name": "dag",
+        "description": "Distributed DAG execution — plan, parallel workers, integrate in one shot",
+        "isSticky": true,
+        "commands": []
+      }
+    ],
+    "commands": [
+      {
+        "command": "singularity.brain.open",
+        "title": "Singularity Brain",
+        "category": "Singularity"
+      },
+      {
+        "command": "singularity.ai.intelligence.open",
+        "title": "Open Intelligence Shell",
+        "category": "Singularity"
+      },
+      {
+        "command": "singularity.ai.memory.open",
+        "title": "Open Memory",
+        "category": "Singularity"
+      },
+      {
+        "command": "singularity.ai.architecture.open",
+        "title": "Open Architecture",
+        "category": "Singularity"
+      },
+      {
+        "command": "singularity.ai.tasks.open",
+        "title": "Open Tasks",
+        "category": "Singularity"
+      },
+      {
+        "command": "singularity.brain.syncEverything",
+        "title": "Sync Everything in Brain",
+        "category": "Singularity Brain"
+      },
+      {
+        "command": "singularity.brain.ultrathink",
+        "title": "UltraThink",
+        "category": "Singularity Brain"
+      },
+      {
+        "command": "singularity.ai.brain.status",
+        "title": "Brain Status",
+        "category": "Singularity Brain"
+      },
+      {
+        "command": "singularity.ai.status",
+        "title": "Show Token Usage",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.cobuild",
+        "title": "Cobuild — Create or Join GPU Pod",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.cobuild.copyToken",
+        "title": "Cobuild: Copy Invite Token",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.cobuild.leave",
+        "title": "Cobuild: Leave Pod",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.clearCache",
+        "title": "Clear AI Caches",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.complete",
+        "title": "Complete Prompt (routed + cached)",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.resetTokenUsage",
+        "title": "Reset Project Token Usage",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.execution.shouldUseEngine",
+        "title": "Execution Engine: Should Use",
+        "category": "Singularity Execution"
+      },
+      {
+        "command": "singularity.execution.run",
+        "title": "Execution Engine: Run",
+        "category": "Singularity Execution"
+      },
+      {
+        "command": "singularity.execution.resume",
+        "title": "Execution Engine: Resume",
+        "category": "Singularity Execution"
+      },
+      {
+        "command": "singularity.ai.recordUsage",
+        "title": "Record Token Usage",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.promptDebug",
+        "title": "Open Prompt Debug Panel",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.architecture.decisions",
+        "title": "List Architecture Decisions",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.outcome.review",
+        "title": "Mission Human Review Decision",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.runtimeExecution",
+        "title": "Open Runtime Execution Panel",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.context.refresh",
+        "title": "Extract Text into Project Context",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.neuralRelay.status",
+        "title": "Neural Relay Status",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.neuralRelay.resolve",
+        "title": "Neural Relay Resolve Context",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.neuralRelay.expand",
+        "title": "Neural Relay Expand Context",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.neuralRelay.latest",
+        "title": "Neural Relay Latest Experiment",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.recordRelay",
+        "title": "Record Neural Relay Usage",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.cacheTelemetry",
+        "title": "Request Telemetry (DeepSeek Cache vs Neural Relay)",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.setRequestPhase",
+        "title": "Set Request Phase",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.context.ingest",
+        "title": "Ingest Text into Project Context",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.context.relevant",
+        "title": "Get Relevant Project Context",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.intelligence.status",
+        "title": "Project Intelligence Status",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.openDesignPreview",
+        "title": "Open Design Canvas",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.startPenpot",
+        "title": "Start Penpot",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.stopPenpot",
+        "title": "Stop Penpot",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.finalizeDesign",
+        "title": "Finalize Design (unlock coding)",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.runDesignPreviewGate",
+        "title": "Run Design Preview Gate",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.compilePromptContext",
+        "title": "Compile Prompt Context",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.runRuntime",
+        "title": "Run Runtime Engine",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.open",
+        "title": "Open LLM Wiki",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.init",
+        "title": "Initialize LLM Wiki",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.ingest",
+        "title": "Ingest into LLM Wiki",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.query",
+        "title": "Query LLM Wiki",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.lint",
+        "title": "Lint LLM Wiki",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.run",
+        "title": "Run LLM Wiki Operation",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.search",
+        "title": "Search LLM Wiki",
+        "category": "Singularity AI"
+      },
+      {
+        "command": "singularity.ai.wiki.fileAnswer",
+        "title": "LLM Wiki File Answer",
+        "category": "Singularity AI"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "singularity.ai.neuralRelay.status",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.neuralRelay.resolve",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.neuralRelay.expand",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.neuralRelay.latest",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.recordRelay",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.setRequestPhase",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.compilePromptContext",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.context.ingest",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.context.relevant",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.runRuntime",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.runDesignPreviewGate",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.openDesignPreview",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.finalizeDesign",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.wiki.run",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.wiki.search",
+          "when": "false"
+        },
+        {
+          "command": "singularity.ai.wiki.fileAnswer",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Singularity AI",
+      "properties": {
+        "singularity.ai.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Initialize the Singularity AI routing and caching stack on startup"
+        },
+        "singularity.ai.localEcho": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use local echo provider when no AI Gateway API key is available"
+        },
+        "singularity.ai.gatewayBaseUrl": {
+          "type": "string",
+          "default": "https://ai-gateway.vercel.sh/v1",
+          "description": "OpenAI-compatible base URL for Vercel AI Gateway (or compatible proxy)"
+        },
+        "singularity.ai.runtimeInline": {
+          "type": "boolean",
+          "default": false,
+          "description": "Deprecated. Multi-agent Runtime is disabled; all chat turns use the sequential agent."
+        },
+        "singularity.ai.runtimeInAgentMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Deprecated. Multi-agent Runtime is disabled in Agent mode."
+        },
+        "singularity.ai.multiAgent.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Multi-agent parallel execution is disabled. All tasks use a single sequential agent (Design Spec + skill for UI)."
+        },
+        "singularity.ai.multiAgent.maxAgents": {
+          "type": "number",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 50,
+          "description": "Maximum specialist agents per mission."
+        },
+        "singularity.ai.multiAgent.maxConcurrentAgents": {
+          "type": "number",
+          "default": 8,
+          "minimum": 1,
+          "maximum": 32,
+          "description": "Maximum agents executing concurrently."
+        },
+        "singularity.ai.multiAgent.maxAgentRetries": {
+          "type": "number",
+          "default": 2,
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Maximum retries per failed agent task."
+        },
+        "singularity.ai.multiAgent.maxTotalTokenBudget": {
+          "type": "number",
+          "default": 2000000,
+          "description": "Soft cap on total tokens across all agents in one mission."
+        },
+        "singularity.ai.multiAgent.maxWorkflowDurationMs": {
+          "type": "number",
+          "default": 1800000,
+          "description": "Maximum mission duration in milliseconds (30 min default)."
+        },
+        "singularity.ai.multiAgent.substrate": {
+          "type": "string",
+          "enum": ["native", "agent-framework"],
+          "default": "native",
+          "description": "Execution substrate: native scheduler or optional Microsoft Agent Framework sidecar."
+        },
+        "singularity.ai.penpotUrl": {
+          "type": "string",
+          "default": "http://localhost:9001",
+          "description": "URL of the local Penpot instance used by Design Preview"
+        },
+        "singularity.ai.designPreviewGate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Deprecated. Design Canvas HITL is disabled; coding starts after Design Spec without Final Design."
+        },
+        "singularity.ai.cobuild.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Singularity Cobuild (shared GPU pods) next to Auto in chat"
+        },
+        "singularity.ai.contextEngine.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Singularity Context Engine for Agent, Ask, Edit, DAG, and Complete (structured project state via LangExtract)"
+        },
+        "singularity.ai.contextEngine.langextractEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use the LangExtract Python sidecar (falls back to heuristic extractor on failure)"
+        },
+        "singularity.ai.contextEngine.retrievalEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable relevance-filtered retrieval over Project State"
+        },
+        "singularity.ai.contextEngine.agentIntegrationEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Inject retrieved Project Context into planner and coding agents"
+        },
+        "singularity.ai.wiki.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Singularity LLM Wiki (Karpathy pattern) — persistent compounding knowledge base"
+        },
+        "singularity.ai.wiki.agentIntegrationEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Inject relevant wiki pages into agent prompts"
+        },
+        "singularity.ai.wiki.root": {
+          "type": "string",
+          "default": ".singularity/wiki",
+          "description": "Wiki root relative to workspace (use wiki for an Obsidian vault at repo root)"
+        },
+        "singularity.ai.intelligence.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run Project Intelligence in a background worker (symbol graph, search). Never blocks chat."
+        },
+        "singularity.ai.intelligence.autoIndex": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow full-repo indexing when explicitly requested. When off, only recent/changed files are indexed on demand."
+        },
+        "singularity.ai.architecture.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Architecture Intelligence (ADR memory). Never blocks the coding LLM."
+        },
+        "singularity.ai.outcome.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Outcome Achievement Engine (async requirement verification). Never blocks the coding LLM."
+        },
+        "singularity.ai.outcome.extractionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Extract structured requirements asynchronously from user missions"
+        },
+        "singularity.ai.outcome.verificationEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run command/test/compiler verification on a background worker pool"
+        },
+        "singularity.ai.outcome.humanReviewEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Evaluate human-review policies asynchronously. Never blocks the coding LLM."
+        },
+        "singularity.ai.architecture.extractionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Extract ADR candidates asynchronously from conversations and diffs"
+        },
+        "singularity.ai.architecture.graphEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Project ADR nodes into the local intelligence graph"
+        },
+        "singularity.ai.architecture.vectorSearchEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Generate ADR embeddings asynchronously (not on the coding path)"
+        },
+        "singularity.ai.architecture.contextEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Inject precomputed architecture context at task start (cache read only)"
+        },
+        "singularity.ai.architecture.driftDetectionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect declared-vs-actual architecture drift (async, not on the coding path)"
+        },
+        "singularity.ai.architecture.evolutionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Propose candidate ADRs when drift or production evidence contradicts a decision (never auto-supersedes)"
+        },
+        "singularity.ai.architecture.conflictDetectionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect proposed changes that conflict with active ADRs (async / explicit, not per token)"
+        },
+        "singularity.ai.architecture.productionAwarenessEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ingest production events asynchronously (never on the coding LLM hot path)"
+        },
+        "singularity.ai.memory.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the async Memory Engine (never on the coding LLM hot path)"
+        },
+        "singularity.ai.memory.extractionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Extract durable memories from agent events in the background"
+        },
+        "singularity.ai.memory.graphEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Index memory relationships (JSON graph; Neo4j when NEO4J_URI is set)"
+        },
+        "singularity.ai.memory.vectorSearchEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Background embeddings for hybrid memory search"
+        },
+        "singularity.ai.memory.contextEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Inject cached project memory snapshot at task boundaries"
+        },
+        "singularity.ai.neuralRelay.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Neural Relay (Nemotron context intelligence → DeepSeek coding)."
+        },
+        "singularity.ai.neuralRelay.model": {
+          "type": "string",
+          "default": "nvidia/nemotron-3-nano-30b-a3b:free",
+          "description": "OpenRouter model id for CONTEXT_INTELLIGENCE (Neural Relay)"
+        },
+        "singularity.ai.neuralRelay.mode": {
+          "type": "string",
+          "enum": [
+            "BASELINE",
+            "NEURAL_RELAY",
+            "NEURAL_RELAY_ITERATIVE"
+          ],
+          "default": "NEURAL_RELAY_ITERATIVE",
+          "description": "Neural Relay execution mode"
+        },
+        "singularity.ai.neuralRelay.confidenceHigh": {
+          "type": "number",
+          "default": 0.65,
+          "description": "Use selected context when Nemotron confidence is at least this value"
+        },
+        "singularity.ai.neuralRelay.confidenceLow": {
+          "type": "number",
+          "default": 0.25,
+          "description": "Retry retrieval when Nemotron confidence is below this value; tight fallback otherwise"
+        },
+        "singularity.ai.neuralRelay.maxFiles": {
+          "type": "number",
+          "default": 8,
+          "description": "Maximum files injected into the coding model context (lower = more cache reuse)"
+        },
+        "singularity.ai.fastPath.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fast path (always preferred for speed): simple single-file tasks skip planner/subagent teams and use one streaming model call. Keeps TPS high when multi-agent is enabled."
+        },
+        "singularity.ai.brain.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Singularity Brain — persistent cognitive runtime (never on the coding hot path)"
+        },
+        "singularity.ai.brain.chatLearning": {
+          "type": "boolean",
+          "default": true,
+          "description": "Observe chat turns and feed them into the Brain attention loop"
+        },
+        "singularity.ai.brain.fileLearning": {
+          "type": "boolean",
+          "default": true,
+          "description": "Observe saved files and update Brain memory incrementally"
+        },
+        "singularity.ai.brain.model.baseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI-compatible Brain model API base URL (independent of chat model)"
+        },
+        "singularity.ai.brain.model.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the dedicated Brain model"
+        },
+        "singularity.ai.brain.model.model": {
+          "type": "string",
+          "default": "",
+          "description": "Model id for the dedicated Brain reasoning MoE"
+        },
+        "singularity.ai.brain.model.timeoutMs": {
+          "type": "number",
+          "default": 120000,
+          "description": "Timeout for Brain model calls in milliseconds"
+        },
+        "singularity.ai.brain.reasoning.default": {
+          "type": "string",
+          "default": "high",
+          "description": "Default reasoning effort for Brain reflections"
+        },
+        "singularity.ai.brain.reasoning.ultrathink": {
+          "type": "string",
+          "default": "maximum",
+          "description": "Reasoning effort for UltraThink mode"
+        },
+        "singularity.ai.brain.contextLimit": {
+          "type": "number",
+          "default": 12000,
+          "description": "Max characters of minimized local context sent to the Brain model"
+        },
+        "singularity.ai.brain.maxBackgroundCallsPerDay": {
+          "type": "number",
+          "default": 48,
+          "description": "Hard cap on background Brain model calls per day"
+        },
+        "singularity.ai.brain.maxTokensPerCall": {
+          "type": "number",
+          "default": 4096,
+          "description": "Max tokens per Brain model call"
+        },
+        "singularity.ai.brain.idleMs": {
+          "type": "number",
+          "default": 300000,
+          "description": "Idle time before optional reflection cycle (ms)"
+        },
+        "singularity.ai.brain.backgroundLevel": {
+          "type": "string",
+          "enum": ["low", "balanced", "high"],
+          "default": "balanced",
+          "description": "Background intelligence intensity"
+        },
+        "singularity.ai.brain.ultrathink": {
+          "type": "string",
+          "enum": ["off", "manual", "automatic"],
+          "default": "automatic",
+          "description": "When UltraThink mode may run"
+        },
+        "singularity.ai.brain.dailyBudgetUsd": {
+          "type": "number",
+          "default": 2,
+          "description": "Soft daily USD budget for Brain model usage"
+        }
+      }
+    },
+    "configurationDefaults": {
+      "files.exclude": {
+        "**/.singularity": false
+      }
+    }
+  },
+  "dependencies": {
+    "@singularity/architecture": "file:../../../packages/architecture",
+    "@singularity/brain": "file:../../../packages/brain",
+    "@singularity/context": "file:../../../packages/context",
+    "@singularity/design": "file:../../../packages/design",
+    "@singularity/intelligence": "file:../../../packages/intelligence",
+    "@singularity/memory": "file:../../../packages/memory",
+    "@singularity/neural-relay": "file:../../../packages/neural-relay",
+    "@singularity/outcome": "file:../../../packages/outcome",
+    "@singularity/router": "file:../../../packages/router",
+    "@singularity/runtime": "file:../../../packages/runtime",
+    "@singularity/execution": "file:../../../packages/execution",
+    "@singularity/wiki": "file:../../../packages/wiki",
+    "graphology": "^0.26.0",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "sigma": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.2"
+  }
+}

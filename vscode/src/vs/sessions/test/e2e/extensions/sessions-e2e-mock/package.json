@@ -1,0 +1,106 @@
+{
+	"name": "sessions-e2e-mock",
+	"displayName": "Sessions E2E Mock",
+	"description": "Mock auth, chat participant, and file system for E2E testing",
+	"version": "0.0.1",
+	"publisher": "vscode",
+	"engines": {
+		"vscode": "^1.100.0"
+	},
+	"extensionKind": ["ui", "workspace"],
+	"browser": "./extension.js",
+	"activationEvents": ["*"],
+	"enabledApiProposals": ["chatSessionsProvider"],
+	"capabilities": {
+		"virtualWorkspaces": true,
+		"untrustedWorkspaces": {
+			"supported": true
+		}
+	},
+	"contributes": {
+		"authentication": [
+			{
+				"id": "github",
+				"label": "GitHub (Mock)"
+			}
+		],
+		"commands": [
+			{
+				"command": "singularity.chat.chat.applySingularityCLIAgentSessionChanges.apply",
+				"title": "Apply Changes",
+				"icon": "$(check)"
+			},
+			{
+				"command": "singularity.chat.chat.checkoutPullRequestReroute",
+				"title": "Checkout Pull Request",
+				"icon": "$(git-pull-request)"
+			},
+			{
+				"command": "singularity.chat.chat.openPullRequestSingularityCLIAgentSession.openPR",
+				"title": "Open Pull Request",
+				"icon": "$(link-external)"
+			},
+			{
+				"command": "singularity.chat.chat.mergeSingularityCLIAgentSessionChanges.merge",
+				"title": "Merge",
+				"icon": "$(git-merge)"
+			},
+			{
+				"command": "singularity.chat.chat.mergeSingularityCLIAgentSessionChanges.mergeAndSync",
+				"title": "Merge and Sync",
+				"icon": "$(git-merge)"
+			},
+			{
+				"command": "singularity.chat.chat.createPullRequestSingularityCLIAgentSession.createPR",
+				"title": "Create PR",
+				"icon": "$(git-pull-request-create)"
+			},
+			{
+				"command": "singularity.chat.chat.updateSingularityCLIAgentSessionChanges.update",
+				"title": "Update",
+				"icon": "$(cloud-upload)"
+			}
+		],
+		"menus": {
+			"chat/input/editing/sessionToolbar": [
+				{
+					"command": "singularity.chat.chat.applySingularityCLIAgentSessionChanges.apply",
+					"when": "chatSessionType == singularitycli && workbenchState != empty && !isSessionsWindow",
+					"group": "navigation@0"
+				},
+				{
+					"command": "singularity.chat.chat.checkoutPullRequestReroute",
+					"when": "chatSessionType == singularity-cloud-agent && !github.vscode-pull-request-github.activated && gitOpenRepositoryCount != 0",
+					"group": "navigation@0"
+				},
+				{
+					"command": "singularity.chat.chat.openPullRequestSingularityCLIAgentSession.openPR",
+					"when": "chatSessionType == singularitycli && isSessionsWindow && sessions.hasOpenPullRequest",
+					"group": "navigation@1"
+				}
+			],
+			"agents/changes/actions/primary": [
+				{
+					"command": "singularity.chat.chat.mergeSingularityCLIAgentSessionChanges.merge",
+					"when": "chatSessionType == singularitycli && isSessionsWindow && !sessions.isMergeBaseBranchProtected",
+					"group": "merge@1"
+				},
+				{
+					"command": "singularity.chat.chat.mergeSingularityCLIAgentSessionChanges.mergeAndSync",
+					"when": "chatSessionType == singularitycli && isSessionsWindow && !sessions.isMergeBaseBranchProtected",
+					"group": "merge@2"
+				},
+				{
+					"command": "singularity.chat.chat.createPullRequestSingularityCLIAgentSession.createPR",
+					"when": "chatSessionType == singularitycli && isSessionsWindow && sessions.isMergeBaseBranchProtected && !sessions.hasOpenPullRequest",
+					"group": "pull_request@1"
+				},
+				{
+					"command": "singularity.chat.chat.updateSingularityCLIAgentSessionChanges.update",
+					"when": "chatSessionType == singularitycli && isSessionsWindow",
+					"group": "update@1"
+				}
+			]
+		}
+	}
+}

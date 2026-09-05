@@ -1,0 +1,119 @@
+/**
+ * Singularity design tokens — single source for webviews.
+ * Workbench CSS mirrors these values (singularity-chat / activitybar / glass / themes).
+ *
+ * Semantic naming supports a future light theme without rewriting components.
+ */
+
+:root,
+.singularity-ui {
+	/* Backgrounds */
+	--background-primary: #0f0f0f;
+	--background-secondary: #141414;
+	--background-tertiary: #1a1a1a;
+
+	/* Surfaces */
+	--surface: #141414;
+	--surface-hover: #1c1c1c;
+	--surface-active: #222222;
+
+	/* Borders */
+	--border-subtle: rgba(255, 255, 255, 0.06);
+	--border-default: rgba(255, 255, 255, 0.1);
+	--border-strong: rgba(255, 255, 255, 0.16);
+
+	/* Text */
+	--text-primary: #e8e8e8;
+	--text-secondary: #9a9a9a;
+	--text-tertiary: #6e6e6e;
+	--text-disabled: #4a4a4a;
+
+	/* Accent — restrained gray-steel; used sparingly */
+	--accent: #8a8a8a;
+	--accent-muted: rgba(138, 138, 138, 0.18);
+	--accent-hover: #a0a0a0;
+
+	/* Status */
+	--success: #3d9a6a;
+	--warning: #c9a227;
+	--error: #d95c6a;
+	--info: #6b8cae;
+
+	/* Spacing scale */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-8: 32px;
+
+	/* Radius — restrained */
+	--radius-sm: 4px;
+	--radius-md: 6px;
+	--radius-lg: 8px;
+
+	/* Shadows — floating surfaces only */
+	--shadow-float: 0 12px 40px rgba(0, 0, 0, 0.55);
+	--shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+	/* Motion */
+	--duration-fast: 120ms;
+	--duration-normal: 180ms;
+	--duration-slow: 250ms;
+	--ease-default: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+	/* Typography */
+	--font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+	--text-page: 15px;
+	--text-section: 13px;
+	--text-body: 13px;
+	--text-secondary-size: 12px;
+	--text-meta: 11px;
+	--text-code: 12px;
+	--text-status: 10px;
+	--line-body: 1.5;
+	--line-dense: 1.35;
+
+	/* Status glyphs (text fallback) */
+	--status-running: '●';
+	--status-complete: '✓';
+	--status-pending: '○';
+	--status-warning: '⚠';
+	--status-failed: '×';
+	--status-retrying: '↻';
+	--status-paused: '⏸';
+}
+
+/* Light theme readiness — apply .theme-light on host when VS Code is light */
+.theme-light,
+.singularity-ui.theme-light {
+	--background-primary: #f5f5f5;
+	--background-secondary: #ececec;
+	--background-tertiary: #e2e2e2;
+	--surface: #ffffff;
+	--surface-hover: #f0f0f0;
+	--surface-active: #e8e8e8;
+	--border-subtle: rgba(0, 0, 0, 0.06);
+	--border-default: rgba(0, 0, 0, 0.1);
+	--border-strong: rgba(0, 0, 0, 0.16);
+	--text-primary: #1a1a1a;
+	--text-secondary: #5a5a5a;
+	--text-tertiary: #7a7a7a;
+	--text-disabled: #9a9a9a;
+	--accent: #4a4a4a;
+	--accent-muted: rgba(74, 74, 74, 0.12);
+	--accent-hover: #2a2a2a;
+	--shadow-float: 0 12px 40px rgba(0, 0, 0, 0.12);
+	--shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root,
+	.singularity-ui {
+		--duration-fast: 0ms;
+		--duration-normal: 0ms;
+		--duration-slow: 0ms;
+	}
+}

@@ -1,0 +1,199 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.singularity-access-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 100000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 48px 24px;
+	background-color: #050505;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0;
+	transition: opacity 280ms ease-out;
+}
+
+.singularity-access-overlay.visible {
+	opacity: 1;
+}
+
+.singularity-access-overlay.exiting {
+	opacity: 0;
+	transition: opacity 240ms ease-out;
+}
+
+.singularity-access-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: min(640px, 100%);
+}
+
+/* Home brand mark is 36px — 6× = 216px display size */
+.singularity-access-logo {
+	width: min(216px, 48vw);
+	height: auto;
+	aspect-ratio: 4 / 3;
+	object-fit: contain;
+	display: block;
+	margin-bottom: 10px;
+	background: transparent;
+	user-select: none;
+	-webkit-user-drag: none;
+	animation: singularity-access-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.singularity-access-wordmark {
+	margin: 0 0 12px;
+	padding: 0;
+	border: none;
+	color: #ffffff;
+	font-family: 'Awesome Lathusca', 'Iowan Old Style', 'Palatino Linotype', Palatino, serif;
+	font-size: clamp(42px, 7vw, 64px);
+	font-weight: 400;
+	letter-spacing: 0.08em;
+	line-height: 1;
+	text-align: center;
+	text-transform: uppercase;
+	animation: singularity-access-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+}
+
+.singularity-access-subtitle {
+	margin: 0 0 32px;
+	padding: 0;
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 14px;
+	line-height: 1.4;
+	text-align: center;
+	animation: singularity-access-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 110ms both;
+}
+
+.singularity-access-form {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	gap: 10px;
+	width: 100%;
+	max-width: 420px;
+	animation: singularity-access-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 140ms both;
+}
+
+.singularity-access-overlay input.singularity-access-input {
+	flex: 1 1 0;
+	min-width: 0;
+	height: 44px;
+	padding: 0 16px;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 10px;
+	background: rgba(12, 12, 12, 0.72);
+	color: #f2f2f2;
+	font-size: 14px;
+	font-family: inherit;
+	outline: none;
+	box-sizing: border-box;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.singularity-access-overlay input.singularity-access-input::placeholder {
+	color: rgba(255, 255, 255, 0.42);
+}
+
+.singularity-access-overlay input.singularity-access-input:focus {
+	border-color: rgba(255, 255, 255, 0.38);
+	background: rgba(18, 18, 18, 0.86);
+}
+
+.singularity-access-overlay button.singularity-access-button {
+	flex: 0 0 auto;
+	width: 100%;
+	min-width: 0;
+	height: 44px;
+	padding: 0 22px;
+	border: none;
+	border-radius: 10px;
+	background: #ffffff;
+	color: #0a0a0a;
+	font-size: 14px;
+	font-weight: 600;
+	font-family: inherit;
+	cursor: pointer;
+	transition: transform 160ms ease, opacity 160ms ease, background-color 160ms ease;
+}
+
+.singularity-access-overlay button.singularity-access-button:hover {
+	background: #f3f3f3;
+	transform: translateY(-1px);
+}
+
+.singularity-access-overlay button.singularity-access-button:active {
+	transform: translateY(0);
+	opacity: 0.92;
+}
+
+.singularity-access-github-row {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 14px;
+	animation: singularity-access-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+.singularity-access-overlay button.singularity-access-github {
+	min-width: 220px;
+	background: #171717;
+	color: #ffffff;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.singularity-access-overlay button.singularity-access-github:hover {
+	background: #222222;
+}
+
+.singularity-access-error {
+	margin: 14px 0 0;
+	min-height: 18px;
+	color: #ff8e8e;
+	font-size: 13px;
+	text-align: center;
+}
+
+@keyframes singularity-access-rise {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 640px) {
+	.singularity-access-form {
+		flex-direction: column;
+	}
+
+	.singularity-access-overlay button.singularity-access-button {
+		width: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.singularity-access-overlay,
+	.singularity-access-logo,
+	.singularity-access-wordmark,
+	.singularity-access-form {
+		animation: none;
+		transition: none;
+	}
+}

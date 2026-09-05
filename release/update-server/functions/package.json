@@ -1,0 +1,14 @@
+{
+  "name": "singularity-update-server",
+  "private": true,
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.21.2",
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.3.0",
+    "semver": "^7.7.1"
+  }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Singularity beta access</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #f2f2f2;
+    }
+    main { max-width: 560px; padding: 32px 24px; }
+    h1 { font-size: 24px; margin: 0 0 12px; letter-spacing: 0.06em; }
+    p { color: #b5b5b5; line-height: 1.55; margin: 0 0 12px; }
+    button, a.btn {
+      display: inline-block;
+      margin: 8px 8px 0 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: #171717;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      font: inherit;
+    }
+    pre {
+      margin: 16px 0;
+      padding: 14px;
+      border-radius: 10px;
+      background: #141414;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      font-size: 12px;
+      color: #fff;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SINGULARITY</h1>
+    <p id="status">Finishing sign-in…</p>
+    <p id="help" class="hidden">
+      If Singularity does not unlock automatically, copy this page URL and paste it into the app’s code field, or run the terminal command below.
+    </p>
+    <div id="actions" class="hidden">
+      <a class="btn" id="openApp" href="#">Open Singularity</a>
+      <button type="button" id="copyUrl">Copy page URL</button>
+    </div>
+    <pre id="cmd" class="hidden"></pre>
+  </main>
+  <script>
+    (function () {
+      const hash = window.location.hash || '';
+      const params = new URLSearchParams(hash.startsWith('#') ? hash.slice(1) : hash);
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      const status = document.getElementById('status');
+      const help = document.getElementById('help');
+      const actions = document.getElementById('actions');
+      const cmdEl = document.getElementById('cmd');
+      const openApp = document.getElementById('openApp');
+      const copyUrl = document.getElementById('copyUrl');
+
+      if (!accessToken || !refreshToken) {
+        status.textContent = 'Open Singularity, tap Send code, then use the link from that email.';
+        return;
+      }
+
+      const deepLink = 'singularity://beta-auth' + hash;
+      const pageUrl = window.location.href;
+      openApp.href = deepLink;
+      cmdEl.textContent =
+        './scripts/complete-beta-auth.sh ' + JSON.stringify(pageUrl);
+      help.classList.remove('hidden');
+      actions.classList.remove('hidden');
+      cmdEl.classList.remove('hidden');
+      status.textContent = 'Email confirmed. Opening Singularity…';
+
+      copyUrl.onclick = async () => {
+        await navigator.clipboard.writeText(pageUrl);
+        copyUrl.textContent = 'Copied';
+      };
+
+      setTimeout(() => { window.location.href = deepLink; }, 300);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+{
+	"nameShort": "Singularity",
+	"nameLong": "Singularity",
+	"applicationName": "singularity",
+	"dataFolderName": ".singularity",
+	"sharedDataFolderName": ".singularity-shared",
+	"win32MutexName": "singularity",
+	"licenseName": "MIT",
+	"licenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+	"serverLicenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+	"serverGreeting": [],
+	"serverLicense": [],
+	"serverLicensePrompt": "",
+	"serverApplicationName": "singularity-server",
+	"serverDataFolderName": ".singularity-server",
+	"tunnelApplicationName": "singularity-tunnel",
+	"win32DirName": "Singularity",
+	"win32NameVersion": "Singularity",
+	"win32RegValueName": "Singularity",
+	"win32x64AppId": "{{D77B7E06-80BA-4137-BCF4-654B95CCEBC5}",
+	"win32arm64AppId": "{{D1ACE434-89C5-48D1-88D3-E2991DF85475}",
+	"win32x64UserAppId": "{{CC6B787D-37A0-49E8-AE24-8559A032BE0C}",
+	"win32arm64UserAppId": "{{3AEBF0C8-F733-4AD4-BADE-FDB816D53D7B}",
+	"win32AppUserModelId": "Singularity.App",
+	"win32ShellNameShort": "S&ingularity",
+	"win32TunnelServiceMutex": "singularity-tunnelservice",
+	"win32TunnelMutex": "singularity-tunnel",
+	"quality": "stable",
+	"mcpGallery": {
+		"serviceUrl": "https://registry.modelcontextprotocol.io",
+		"itemWebUrl": "https://registry.modelcontextprotocol.io",
+		"publisherUrl": "https://github.com/{name}",
+		"supportUrl": "https://github.com/modelcontextprotocol/registry/issues",
+		"privacyPolicyUrl": "https://modelcontextprotocol.io",
+		"termsOfServiceUrl": "https://modelcontextprotocol.io",
+		"reportUrl": "https://github.com/modelcontextprotocol/registry/issues"
+	},
+	"enableTelemetry": false,
+	"updateUrl": "https://singularity-ide.web.app",
+	"singularityUpdateManifestUrl": "https://singularity-ide.web.app/api/releases/manifest.json",
+	"singularitySupabaseUrl": "https://nuwsczuwyezpodtnouqf.supabase.co",
+	"singularitySupabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51d3NjenV3eWV6cG9kdG5vdXFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzOTExMTYsImV4cCI6MjEwMTk2NzExNn0.xqrEqaV9pfQchO7MDs6E-59wGDDIIqDLs5qVfsGwkQs",
+	"singularityLlmProxyUrl": "https://nuwsczuwyezpodtnouqf.supabase.co/functions/v1/llm-proxy/v1",
+	"singularityBetaAuthRedirectUrl": "https://singularity-ide.web.app/auth/beta.html",
+	"singularityAllowedEmailDomain": "zansoc.com",
+	"darwinBundleIdentifier": "com.singularity.app",
+	"darwinProfileUUID": "47827DD9-4734-49A0-AF80-7E19B11495CC",
+	"darwinProfilePayloadUUID": "CF808BE7-53F3-46C6-A7E2-7EDB98A5E959",
+	"linuxIconName": "singularity",
+	"licenseFileName": "LICENSE.txt",
+	"reportIssueUrl": "",
+	"nodejsArtifactFeed": "",
+	"electronArtifactFeed": "",
+	"urlProtocol": "singularity",
+	"agentsTelemetryAppName": "agents",
+	"builtInExtensions": [
+		{
+			"name": "ms-vscode.js-debug-companion",
+			"version": "1.1.3",
+			"sha256": "7380a890787452f14b2db7835dfa94de538caf358ebc263f9d46dd68ac52de93",
+			"repo": "https://github.com/microsoft/vscode-js-debug-companion",
+			"metadata": {
+				"id": "99cb0b7f-7354-4278-b8da-6cc79972169d",
+				"publisherId": {
+					"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+					"publisherName": "ms-vscode",
+					"displayName": "Microsoft",
+					"flags": "verified"
+				},
+				"publisherDisplayName": "Microsoft"
+			}
+		},
+		{
+			"name": "ms-vscode.js-debug",
+			"version": "1.117.0",
+			"sha256": "854eeb8a785b1f41ba2bd02d7ccd4fdbe10021b61473293973c7e96d036c7fb8",
+			"repo": "https://github.com/microsoft/vscode-js-debug",
+			"metadata": {
+				"id": "25629058-ddac-4e17-abba-74678e126c5d",
+				"publisherId": {
+					"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+					"publisherName": "ms-vscode",
+					"displayName": "Microsoft",
+					"flags": "verified"
+				},
+				"publisherDisplayName": "Microsoft"
+			}
+		},
+		{
+			"name": "ms-vscode.vscode-js-profile-table",
+			"version": "1.0.11",
+			"sha256": "a962a1e6a3baf74c9354b7f47fa96e6d6f0423a63bff55d7f976b6134a748ae9",
+			"repo": "https://github.com/microsoft/vscode-js-profile-visualizer",
+			"metadata": {
+				"id": "7e52b41b-71ad-457b-ab7e-0620f1fc4feb",
+				"publisherId": {
+					"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+					"publisherName": "ms-vscode",
+					"displayName": "Microsoft",
+					"flags": "verified"
+				},
+				"publisherDisplayName": "Microsoft"
+			}
+		},
+		{
+			"name": "PKief.material-icon-theme",
+			"version": "5.37.0",
+			"sha256": "ade9adefe3909cea92aed52850ddd00975d1dc1b62fe558831f6fb8b88f7c3ce",
+			"repo": "https://github.com/material-extensions/vscode-material-icon-theme",
+			"metadata": {
+				"id": "5db78037-f674-459f-a236-db622c427c5b",
+				"publisherId": {
+					"publisherId": "f9e5bc2f-fea1-4075-917f-d83e01e69f56",
+					"publisherName": "PKief",
+					"displayName": "Philipp Kief",
+					"flags": "verified"
+				},
+				"publisherDisplayName": "Philipp Kief"
+			}
+		},
+		{
+			"name": "PKief.material-product-icons",
+			"version": "1.7.1",
+			"sha256": "f3479a09637d17fe3ef3a4862bc0e94ee2eed2b1a168a829952023db53a10d8a",
+			"repo": "https://github.com/material-extensions/vscode-material-product-icons",
+			"metadata": {
+				"id": "f797dacd-4e80-4f33-8b63-d665c0956013",
+				"publisherId": {
+					"publisherId": "f9e5bc2f-fea1-4075-917f-d83e01e69f56",
+					"publisherName": "PKief",
+					"displayName": "Philipp Kief",
+					"flags": "verified"
+				},
+				"publisherDisplayName": "Philipp Kief"
+			}
+		}
+	],
+	"defaultChatAgent": {
+		"extensionId": "Singularity.singularity",
+		"chatExtensionId": "Singularity.singularity-chat",
+		"chatExtensionOutputId": "Singularity.singularity-chat.Singularity AI.log",
+		"chatExtensionOutputExtensionStateCommand": "singularity.chat.debug.extensionState",
+		"documentationUrl": "",
+		"termsStatementUrl": "",
+		"privacyStatementUrl": "",
+		"skusDocumentationUrl": "",
+		"optimizeUsageDocumentationUrl": "",
+		"publicCodeMatchesUrl": "",
+		"managePlanUrl": "",
+		"upgradePlanUrl": "",
+		"signUpUrl": "",
+		"provider": {
+			"default": {
+				"id": "github",
+				"name": "GitHub"
+			},
+			"enterprise": {
+				"id": "github-enterprise",
+				"name": "GHE"
+			},
+			"google": {
+				"id": "google",
+				"name": "Google"
+			},
+			"apple": {
+				"id": "apple",
+				"name": "Apple"
+			}
+		},
+		"providerExtensionId": "vscode.github-authentication",
+		"providerUriSetting": "github-enterprise.uri",
+		"providerScopes": [
+			[
+				"read:user",
+				"user:email",
+				"repo",
+				"workflow"
+			],
+			[
+				"user:email"
+			],
+			[
+				"read:user"
+			]
+		],
+		"entitlementUrl": "",
+		"entitlementSignupLimitedUrl": "",
+		"chatQuotaExceededContext": "singularity.chat.chat.quotaExceeded",
+		"completionsQuotaExceededContext": "singularity.chat.completions.quotaExceeded",
+		"walkthroughCommand": "singularity.chat.open.walkthrough",
+		"completionsMenuCommand": "singularity.chat.toggleStatusMenu",
+		"chatRefreshTokenCommand": "singularity.chat.refreshToken",
+		"generateCommitMessageCommand": "singularity.chat.git.generateCommitMessage",
+		"resolveMergeConflictsCommand": "singularity.chat.git.resolveMergeConflicts",
+		"completionsAdvancedSetting": "singularity.chat.advanced",
+		"completionsEnablementSetting": "singularity.chat.enable",
+		"nextEditSuggestionsSetting": "singularity.chat.nextEditSuggestions.enabled",
+		"tokenEntitlementUrl": "",
+		"mcpRegistryDataUrl": "",
+		"managedSettingsUrl": ""
+	},
+	"trustedExtensionAuthAccess": {
+		"github": [
+			"Singularity.singularity-chat"
+		],
+		"github-enterprise": [
+			"Singularity.singularity-chat"
+		]
+	},
+	"onboardingKeymaps": [
+		{
+			"id": "vscode",
+			"label": "VS Code",
+			"description": "Default keyboard mapping"
+		},
+		{
+			"id": "sublime",
+			"label": "Sublime Text",
+			"extensionId": "ms-vscode.sublime-keybindings",
+			"description": "Keyboard mapping from Sublime Text"
+		},
+		{
+			"id": "intellij",
+			"label": "IntelliJ / JetBrains",
+			"extensionId": "k--kato.intellij-idea-keybindings",
+			"description": "Keyboard mapping from IntelliJ IDEA"
+		},
+		{
+			"id": "vim",
+			"label": "Vim",
+			"extensionId": "vscodevim.vim",
+			"description": "Vim modal editing"
+		},
+		{
+			"id": "eclipse",
+			"label": "Eclipse",
+			"extensionId": "alphabotsec.vscode-eclipse-keybindings",
+			"description": "Keyboard mapping from Eclipse"
+		},
+		{
+			"id": "notepadpp",
+			"label": "Notepad++",
+			"extensionId": "ms-vscode.notepadplusplus-keybindings",
+			"description": "Keyboard mapping from Notepad++"
+		}
+	],
+	"onboardingThemes": [
+		{
+			"id": "singularity-dark",
+			"label": "Singularity Dark",
+			"themeId": "Singularity Dark",
+			"type": "dark"
+		},
+		{
+			"id": "hc-dark",
+			"label": "Dark High Contrast",
+			"themeId": "Default High Contrast",
+			"type": "hcDark"
+		},
+		{
+			"id": "solarized-dark",
+			"label": "Solarized Dark",
+			"themeId": "Solarized Dark",
+			"type": "dark"
+		},
+		{
+			"id": "singularity-light",
+			"label": "Singularity Light",
+			"themeId": "Singularity Light",
+			"type": "light"
+		},
+		{
+			"id": "hc-light",
+			"label": "Light High Contrast",
+			"themeId": "Default High Contrast Light",
+			"type": "hcLight"
+		},
+		{
+			"id": "solarized-light",
+			"label": "Solarized Light",
+			"themeId": "Solarized Light",
+			"type": "light"
+		}
+	],
+	"builtInExtensionsEnabledWithAutoUpdates": [],
+	"sessionsWindowAllowedExtensions": []
+}

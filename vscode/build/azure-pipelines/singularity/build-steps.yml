@@ -1,0 +1,8 @@
+steps:
+  - script: BUILD_SOURCESDIRECTORY=$(Build.SourcesDirectory)/extensions/singularity-chat npm run mixin
+    workingDirectory: $(Build.SourcesDirectory)/.build/vscode-capi
+    displayName: Mixin vscode-capi
+
+  - script: npm run build
+    workingDirectory: $(Build.SourcesDirectory)/extensions/singularity-chat
+    displayName: Build singularity extension

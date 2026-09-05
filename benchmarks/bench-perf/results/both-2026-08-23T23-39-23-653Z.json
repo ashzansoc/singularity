@@ -1,0 +1,174 @@
+{
+  "ts": "2026-08-23T23:35:27.613Z",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "maxTokens": 160,
+  "temp": 0.2,
+  "side": "both",
+  "fixtures": {
+    "explain": {
+      "harness": {
+        "runs": 2,
+        "okRuns": 2,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 5706,
+        "totalP50Ms": 6709,
+        "tpsRenderedMean": 20.4,
+        "tpsRenderedP50": 22.5,
+        "tokensMean": 114,
+        "errors": []
+      },
+      "singularity": {
+        "A": {
+          "runs": 2,
+          "okRuns": 2,
+          "ttftMeanMs": 3790,
+          "ttftP50Ms": 3790,
+          "totalMeanMs": 9401,
+          "totalP50Ms": 14375,
+          "tpsRenderedMean": 252.3,
+          "tpsRenderedP50": 252.3,
+          "tokensMean": 176,
+          "errors": []
+        },
+        "B": {
+          "runs": 2,
+          "okRuns": 2,
+          "ttftMeanMs": 1172,
+          "ttftP50Ms": 1507,
+          "totalMeanMs": 2840,
+          "totalP50Ms": 3503,
+          "tpsRenderedMean": 54.8,
+          "tpsRenderedP50": 59,
+          "tokensMean": 90,
+          "errors": []
+        },
+        "C": {
+          "runs": 2,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": [
+            "ProviderError: AI gateway error 400",
+            "ProviderError: AI gateway error 400"
+          ]
+        }
+      }
+    },
+    "plan": {
+      "harness": {
+        "runs": 2,
+        "okRuns": 2,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 4443,
+        "totalP50Ms": 4985,
+        "tpsRenderedMean": 29.3,
+        "tpsRenderedP50": 36.2,
+        "tokensMean": 127,
+        "errors": []
+      },
+      "singularity": {
+        "A": {
+          "runs": 2,
+          "okRuns": 2,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 8929,
+          "totalP50Ms": 14871,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 237,
+          "errors": []
+        },
+        "B": {
+          "runs": 2,
+          "okRuns": 2,
+          "ttftMeanMs": 6713,
+          "ttftP50Ms": 12539,
+          "totalMeanMs": 8018,
+          "totalP50Ms": 13806,
+          "tpsRenderedMean": 10.1,
+          "tpsRenderedP50": 19.3,
+          "tokensMean": 14,
+          "errors": []
+        },
+        "C": {
+          "runs": 2,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": [
+            "ProviderError: AI gateway error 400",
+            "ProviderError: AI gateway error 400"
+          ]
+        }
+      }
+    },
+    "edit": {
+      "harness": {
+        "runs": 2,
+        "okRuns": 2,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 6066,
+        "totalP50Ms": 6899,
+        "tpsRenderedMean": 11.5,
+        "tpsRenderedP50": 12.2,
+        "tokensMean": 71,
+        "errors": []
+      },
+      "singularity": {
+        "A": {
+          "runs": 2,
+          "okRuns": 2,
+          "ttftMeanMs": 27066,
+          "ttftP50Ms": 48672,
+          "totalMeanMs": 27307,
+          "totalP50Ms": 49027,
+          "tpsRenderedMean": 996.5,
+          "tpsRenderedP50": 1493.6,
+          "tokensMean": 183,
+          "errors": []
+        },
+        "B": {
+          "runs": 2,
+          "okRuns": 2,
+          "ttftMeanMs": 6272,
+          "ttftP50Ms": 10291,
+          "totalMeanMs": 9805,
+          "totalP50Ms": 11652,
+          "tpsRenderedMean": 18.8,
+          "tpsRenderedP50": 30.1,
+          "tokensMean": 42,
+          "errors": []
+        },
+        "C": {
+          "runs": 2,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": [
+            "ProviderError: AI gateway error 400",
+            "ProviderError: AI gateway error 400"
+          ]
+        }
+      }
+    }
+  }
+}

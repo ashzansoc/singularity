@@ -1,0 +1,245 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.singularity-profile-editor {
+	height: 100%;
+	overflow: auto;
+	background: #0F0F0F;
+	color: #F4F4F5;
+}
+
+.singularity-profile-shell {
+	max-width: 720px;
+	margin: 0 auto;
+	padding: 48px 32px 72px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.singularity-profile-hero {
+	display: flex;
+	gap: 28px;
+	align-items: center;
+	padding: 28px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 18px;
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, transparent 48%),
+		#161616;
+}
+
+.singularity-profile-avatar {
+	position: relative;
+	width: 88px;
+	height: 88px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	overflow: hidden;
+	background: #2A2A2A;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.singularity-profile-initials,
+.singularity-profile-avatar-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.singularity-profile-initials {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28px;
+	font-weight: 650;
+	letter-spacing: 0.04em;
+	color: #F4F4F5;
+}
+
+.singularity-profile-avatar-img {
+	object-fit: cover;
+}
+
+.singularity-profile-hero-copy {
+	min-width: 0;
+	flex: 1;
+}
+
+.singularity-profile-kicker {
+	font-size: 11px;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: rgba(244, 244, 245, 0.55);
+	margin-bottom: 8px;
+}
+
+.singularity-profile-title {
+	margin: 0;
+	font-size: 28px;
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.15;
+}
+
+.singularity-profile-subtitle {
+	margin: 10px 0 18px;
+	max-width: 46ch;
+	color: rgba(244, 244, 245, 0.72);
+	line-height: 1.5;
+}
+
+.singularity-profile-hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.singularity-profile-card {
+	padding: 24px 28px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 16px;
+	background: #141414;
+}
+
+.singularity-profile-card h2 {
+	margin: 0 0 14px;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.singularity-profile-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.singularity-profile-card-header h2 {
+	margin: 0;
+}
+
+.singularity-profile-pill {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	padding: 4px 9px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: rgba(244, 244, 245, 0.8);
+}
+
+.singularity-profile-pill.trial {
+	border-color: rgba(212, 168, 75, 0.45);
+	color: #E8C57A;
+}
+
+.singularity-profile-pill.subscribed {
+	border-color: rgba(110, 186, 132, 0.45);
+	color: #8ED4A4;
+}
+
+.singularity-profile-pill.expired {
+	border-color: rgba(232, 109, 109, 0.4);
+	color: #F0A0A0;
+}
+
+.singularity-profile-meter {
+	height: 8px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.08);
+	margin-bottom: 12px;
+	overflow: hidden;
+	position: relative;
+}
+
+.singularity-profile-meter::after {
+	content: '';
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: calc(var(--singularity-trial-progress, 0) * 100%);
+	background: #D4A84B;
+}
+
+.singularity-profile-meter-copy {
+	font-size: 13px;
+	color: rgba(244, 244, 245, 0.78);
+	margin-bottom: 16px;
+}
+
+.singularity-profile-meta {
+	display: grid;
+	grid-template-columns: 140px 1fr;
+	gap: 8px 16px;
+	margin: 0;
+}
+
+.singularity-profile-meta dt {
+	margin: 0;
+	color: rgba(244, 244, 245, 0.5);
+	font-size: 12px;
+}
+
+.singularity-profile-meta dd {
+	margin: 0;
+	font-size: 13px;
+}
+
+.singularity-profile-muted {
+	margin: 0 0 16px;
+	color: rgba(244, 244, 245, 0.62);
+	line-height: 1.5;
+}
+
+.singularity-profile-ok {
+	margin: 0;
+	color: #8ED4A4;
+}
+
+.singularity-profile-price {
+	display: flex;
+	align-items: baseline;
+	gap: 6px;
+	margin-bottom: 10px;
+}
+
+.singularity-profile-price-amount {
+	font-size: 36px;
+	font-weight: 650;
+	letter-spacing: -0.04em;
+}
+
+.singularity-profile-price-period,
+.singularity-profile-price-gst {
+	color: rgba(244, 244, 245, 0.62);
+	font-size: 15px;
+}
+
+.monaco-workbench.vs .singularity-profile-editor {
+	background: #F3F3F3;
+	color: #1A1A1A;
+}
+
+.monaco-workbench.vs .singularity-profile-hero,
+.monaco-workbench.vs .singularity-profile-card {
+	background: #FFFFFF;
+	border-color: rgba(0, 0, 0, 0.08);
+}
+
+.monaco-workbench.vs .singularity-profile-kicker,
+.monaco-workbench.vs .singularity-profile-muted,
+.monaco-workbench.vs .singularity-profile-meta dt,
+.monaco-workbench.vs .singularity-profile-price-period,
+.monaco-workbench.vs .singularity-profile-price-gst {
+	color: rgba(26, 26, 26, 0.55);
+}
+
+.monaco-workbench.vs .singularity-profile-subtitle,
+.monaco-workbench.vs .singularity-profile-meter-copy,
+.monaco-workbench.vs .singularity-profile-meta dd {
+	color: rgba(26, 26, 26, 0.78);
+}

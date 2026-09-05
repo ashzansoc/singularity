@@ -1,0 +1,971 @@
+[
+  {
+    "id": "oauth-apple-signin",
+    "difficulty": "complex",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts",
+      "src/auth/authMiddleware.ts",
+      "tests/auth.test.ts"
+    ],
+    "prompt": "Find the Google OAuth implementation and replace it with Apple Sign-In while preserving the existing authentication architecture, routing behavior, error handling and tests."
+  },
+  {
+    "id": "t001-search-simple",
+    "prompt": "Locate the Google OAuth client id constant.",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t002-search-simple",
+    "prompt": "Find AuthProvider and list its exported functions.",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t003-search-simple",
+    "prompt": "Where is the OAuth callback path defined?",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t004-auth-simple",
+    "prompt": "Add a comment documenting signInWithGoogle.",
+    "difficulty": "simple",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t005-api-simple",
+    "prompt": "Add GET /api/health that returns {ok:true}.",
+    "difficulty": "simple",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t006-database-simple",
+    "prompt": "Add created_at column to the users schema.",
+    "difficulty": "simple",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t007-frontend-simple",
+    "prompt": "Change LoginPage title to Sign in.",
+    "difficulty": "simple",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts"
+    ]
+  },
+  {
+    "id": "t008-backend-simple",
+    "prompt": "Return 404 from handleApi for unknown paths using a typed error.",
+    "difficulty": "simple",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t009-bugfix-simple",
+    "prompt": "authMiddleware should not throw on non-callback paths with empty query.",
+    "difficulty": "simple",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t010-tests-simple",
+    "prompt": "Add a test that AppRouter exposes /login.",
+    "difficulty": "simple",
+    "category": "tests",
+    "expectedFiles": [
+      "src/routes/AppRouter.ts"
+    ]
+  },
+  {
+    "id": "t011-search-simple",
+    "prompt": "Locate the Google OAuth client id constant. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t012-search-simple",
+    "prompt": "Find AuthProvider and list its exported functions. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t013-search-simple",
+    "prompt": "Where is the OAuth callback path defined? (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t014-auth-simple",
+    "prompt": "Add a comment documenting signInWithGoogle. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t015-api-simple",
+    "prompt": "Add GET /api/health that returns {ok:true}. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t016-database-simple",
+    "prompt": "Add created_at column to the users schema. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t017-frontend-simple",
+    "prompt": "Change LoginPage title to Sign in. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts"
+    ]
+  },
+  {
+    "id": "t018-backend-simple",
+    "prompt": "Return 404 from handleApi for unknown paths using a typed error. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t019-bugfix-simple",
+    "prompt": "authMiddleware should not throw on non-callback paths with empty query. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t020-tests-simple",
+    "prompt": "Add a test that AppRouter exposes /login. (variant 2: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "tests",
+    "expectedFiles": [
+      "src/routes/AppRouter.ts"
+    ]
+  },
+  {
+    "id": "t021-search-simple",
+    "prompt": "Locate the Google OAuth client id constant. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t022-search-simple",
+    "prompt": "Find AuthProvider and list its exported functions. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t023-search-simple",
+    "prompt": "Where is the OAuth callback path defined? (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "search",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t024-auth-simple",
+    "prompt": "Add a comment documenting signInWithGoogle. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t025-api-simple",
+    "prompt": "Add GET /api/health that returns {ok:true}. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t026-database-simple",
+    "prompt": "Add created_at column to the users schema. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t027-frontend-simple",
+    "prompt": "Change LoginPage title to Sign in. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts"
+    ]
+  },
+  {
+    "id": "t028-backend-simple",
+    "prompt": "Return 404 from handleApi for unknown paths using a typed error. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t029-bugfix-simple",
+    "prompt": "authMiddleware should not throw on non-callback paths with empty query. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t030-tests-simple",
+    "prompt": "Add a test that AppRouter exposes /login. (variant 3: keep public APIs stable.)",
+    "difficulty": "simple",
+    "category": "tests",
+    "expectedFiles": [
+      "src/routes/AppRouter.ts"
+    ]
+  },
+  {
+    "id": "t031-auth-medium",
+    "prompt": "Extract OAuth provider name into a shared type used by AuthProvider and google.ts.",
+    "difficulty": "medium",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t032-api-medium",
+    "prompt": "Validate email on createUser and reject empty strings.",
+    "difficulty": "medium",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t033-database-medium",
+    "prompt": "Add an oauth_accounts table linked to users.",
+    "difficulty": "medium",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t034-frontend-medium",
+    "prompt": "Show the current OAuth provider name on LoginPage.",
+    "difficulty": "medium",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/config.ts"
+    ]
+  },
+  {
+    "id": "t035-backend-medium",
+    "prompt": "Protect /api/users with authMiddleware.",
+    "difficulty": "medium",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t036-refactor-medium",
+    "prompt": "Rename googleOAuthCallback to oauthCallback without changing behavior.",
+    "difficulty": "medium",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t037-bugfix-medium",
+    "prompt": "googleOAuthCallback throws on empty code; return {ok:false} instead while tests still cover the error path.",
+    "difficulty": "medium",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t038-tests-medium",
+    "prompt": "Extend auth tests to cover logout.",
+    "difficulty": "medium",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t039-cross-module-medium",
+    "prompt": "Pass oauth provider from config into LoginPage and AuthProvider.",
+    "difficulty": "medium",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t040-architecture-medium",
+    "prompt": "Document the authentication architecture in README without changing code behavior.",
+    "difficulty": "medium",
+    "category": "architecture",
+    "expectedFiles": [
+      "README.md"
+    ]
+  },
+  {
+    "id": "t041-auth-medium",
+    "prompt": "Extract OAuth provider name into a shared type used by AuthProvider and google.ts. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t042-api-medium",
+    "prompt": "Validate email on createUser and reject empty strings. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t043-database-medium",
+    "prompt": "Add an oauth_accounts table linked to users. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t044-frontend-medium",
+    "prompt": "Show the current OAuth provider name on LoginPage. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/config.ts"
+    ]
+  },
+  {
+    "id": "t045-backend-medium",
+    "prompt": "Protect /api/users with authMiddleware. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t046-refactor-medium",
+    "prompt": "Rename googleOAuthCallback to oauthCallback without changing behavior. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t047-bugfix-medium",
+    "prompt": "googleOAuthCallback throws on empty code; return {ok:false} instead while tests still cover the error path. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t048-tests-medium",
+    "prompt": "Extend auth tests to cover logout. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t049-cross-module-medium",
+    "prompt": "Pass oauth provider from config into LoginPage and AuthProvider. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t050-architecture-medium",
+    "prompt": "Document the authentication architecture in README without changing code behavior. (variant 2: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "architecture",
+    "expectedFiles": [
+      "README.md"
+    ]
+  },
+  {
+    "id": "t051-auth-medium",
+    "prompt": "Extract OAuth provider name into a shared type used by AuthProvider and google.ts. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t052-api-medium",
+    "prompt": "Validate email on createUser and reject empty strings. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t053-database-medium",
+    "prompt": "Add an oauth_accounts table linked to users. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t054-frontend-medium",
+    "prompt": "Show the current OAuth provider name on LoginPage. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/config.ts"
+    ]
+  },
+  {
+    "id": "t055-backend-medium",
+    "prompt": "Protect /api/users with authMiddleware. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t056-refactor-medium",
+    "prompt": "Rename googleOAuthCallback to oauthCallback without changing behavior. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t057-bugfix-medium",
+    "prompt": "googleOAuthCallback throws on empty code; return {ok:false} instead while tests still cover the error path. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t058-tests-medium",
+    "prompt": "Extend auth tests to cover logout. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t059-cross-module-medium",
+    "prompt": "Pass oauth provider from config into LoginPage and AuthProvider. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t060-architecture-medium",
+    "prompt": "Document the authentication architecture in README without changing code behavior. (variant 3: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "architecture",
+    "expectedFiles": [
+      "README.md"
+    ]
+  },
+  {
+    "id": "t061-auth-medium",
+    "prompt": "Extract OAuth provider name into a shared type used by AuthProvider and google.ts. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "auth",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t062-api-medium",
+    "prompt": "Validate email on createUser and reject empty strings. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t063-database-medium",
+    "prompt": "Add an oauth_accounts table linked to users. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts"
+    ]
+  },
+  {
+    "id": "t064-frontend-medium",
+    "prompt": "Show the current OAuth provider name on LoginPage. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/config.ts"
+    ]
+  },
+  {
+    "id": "t065-backend-medium",
+    "prompt": "Protect /api/users with authMiddleware. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "backend",
+    "expectedFiles": [
+      "src/api/router.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t066-refactor-medium",
+    "prompt": "Rename googleOAuthCallback to oauthCallback without changing behavior. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "src/auth/authMiddleware.ts"
+    ]
+  },
+  {
+    "id": "t067-bugfix-medium",
+    "prompt": "googleOAuthCallback throws on empty code; return {ok:false} instead while tests still cover the error path. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "bugfix",
+    "expectedFiles": [
+      "src/auth/google.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t068-tests-medium",
+    "prompt": "Extend auth tests to cover logout. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t069-cross-module-medium",
+    "prompt": "Pass oauth provider from config into LoginPage and AuthProvider. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t070-architecture-medium",
+    "prompt": "Document the authentication architecture in README without changing code behavior. (variant 4: keep public APIs stable.)",
+    "difficulty": "medium",
+    "category": "architecture",
+    "expectedFiles": [
+      "README.md"
+    ]
+  },
+  {
+    "id": "t071-api-complex",
+    "prompt": "Add pagination to listUsers and thread it through handleApi.",
+    "difficulty": "complex",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts",
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t072-database-complex",
+    "prompt": "Migrate provider default from google to apple in schema and document it.",
+    "difficulty": "complex",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts",
+      "README.md"
+    ]
+  },
+  {
+    "id": "t073-frontend-complex",
+    "prompt": "Add an Apple sign-in button next to Google on LoginPage wired to AuthProvider.",
+    "difficulty": "complex",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t074-backend-complex",
+    "prompt": "Add session token issuance after OAuth callback and store provider on the user.",
+    "difficulty": "complex",
+    "category": "backend",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts",
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t075-refactor-complex",
+    "prompt": "Split AuthProvider login/logout into a strategy interface.",
+    "difficulty": "complex",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t076-tests-complex",
+    "prompt": "Add tests for Apple Sign-In once implemented, preserving Google coverage.",
+    "difficulty": "complex",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t077-cross-module-complex",
+    "prompt": "Wire Apple Sign-In through config, AuthProvider, middleware, schema, and tests.",
+    "difficulty": "complex",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/auth/AuthProvider.ts",
+      "src/auth/authMiddleware.ts",
+      "src/db/schema.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t078-architecture-complex",
+    "prompt": "Introduce an AuthAdapter interface and keep Google as the default adapter.",
+    "difficulty": "complex",
+    "category": "architecture",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t079-api-complex",
+    "prompt": "Add pagination to listUsers and thread it through handleApi. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts",
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t080-database-complex",
+    "prompt": "Migrate provider default from google to apple in schema and document it. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts",
+      "README.md"
+    ]
+  },
+  {
+    "id": "t081-frontend-complex",
+    "prompt": "Add an Apple sign-in button next to Google on LoginPage wired to AuthProvider. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t082-backend-complex",
+    "prompt": "Add session token issuance after OAuth callback and store provider on the user. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "backend",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts",
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t083-refactor-complex",
+    "prompt": "Split AuthProvider login/logout into a strategy interface. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t084-tests-complex",
+    "prompt": "Add tests for Apple Sign-In once implemented, preserving Google coverage. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t085-cross-module-complex",
+    "prompt": "Wire Apple Sign-In through config, AuthProvider, middleware, schema, and tests. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/auth/AuthProvider.ts",
+      "src/auth/authMiddleware.ts",
+      "src/db/schema.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t086-architecture-complex",
+    "prompt": "Introduce an AuthAdapter interface and keep Google as the default adapter. (variant 2: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "architecture",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t087-api-complex",
+    "prompt": "Add pagination to listUsers and thread it through handleApi. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts",
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t088-database-complex",
+    "prompt": "Migrate provider default from google to apple in schema and document it. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts",
+      "README.md"
+    ]
+  },
+  {
+    "id": "t089-frontend-complex",
+    "prompt": "Add an Apple sign-in button next to Google on LoginPage wired to AuthProvider. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t090-backend-complex",
+    "prompt": "Add session token issuance after OAuth callback and store provider on the user. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "backend",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts",
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t091-refactor-complex",
+    "prompt": "Split AuthProvider login/logout into a strategy interface. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t092-tests-complex",
+    "prompt": "Add tests for Apple Sign-In once implemented, preserving Google coverage. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "tests",
+    "expectedFiles": [
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t093-cross-module-complex",
+    "prompt": "Wire Apple Sign-In through config, AuthProvider, middleware, schema, and tests. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "cross-module",
+    "expectedFiles": [
+      "src/config.ts",
+      "src/auth/AuthProvider.ts",
+      "src/auth/authMiddleware.ts",
+      "src/db/schema.ts",
+      "tests/auth.test.ts"
+    ]
+  },
+  {
+    "id": "t094-architecture-complex",
+    "prompt": "Introduce an AuthAdapter interface and keep Google as the default adapter. (variant 3: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "architecture",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts",
+      "src/auth/google.ts"
+    ]
+  },
+  {
+    "id": "t095-api-complex",
+    "prompt": "Add pagination to listUsers and thread it through handleApi. (variant 4: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "api",
+    "expectedFiles": [
+      "src/api/users.ts",
+      "src/api/router.ts"
+    ]
+  },
+  {
+    "id": "t096-database-complex",
+    "prompt": "Migrate provider default from google to apple in schema and document it. (variant 4: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "database",
+    "expectedFiles": [
+      "src/db/schema.ts",
+      "README.md"
+    ]
+  },
+  {
+    "id": "t097-frontend-complex",
+    "prompt": "Add an Apple sign-in button next to Google on LoginPage wired to AuthProvider. (variant 4: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "frontend",
+    "expectedFiles": [
+      "src/ui/LoginPage.ts",
+      "src/auth/AuthProvider.ts"
+    ]
+  },
+  {
+    "id": "t098-backend-complex",
+    "prompt": "Add session token issuance after OAuth callback and store provider on the user. (variant 4: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "backend",
+    "expectedFiles": [
+      "src/auth/authMiddleware.ts",
+      "src/api/users.ts"
+    ]
+  },
+  {
+    "id": "t099-refactor-complex",
+    "prompt": "Split AuthProvider login/logout into a strategy interface. (variant 4: keep public APIs stable.)",
+    "difficulty": "complex",
+    "category": "refactor",
+    "expectedFiles": [
+      "src/auth/AuthProvider.ts"
+    ]
+  }
+]

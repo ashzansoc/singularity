@@ -1,0 +1,24 @@
+{
+  "ts": "2026-08-23T23:31:34.445Z",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "maxTokens": 160,
+  "temp": 0.2,
+  "side": "singularity",
+  "fixtures": {
+    "explain": {
+      "singularityDry": {
+        "note": "dry mode — no network"
+      }
+    },
+    "plan": {
+      "singularityDry": {
+        "note": "dry mode — no network"
+      }
+    },
+    "edit": {
+      "singularityDry": {
+        "note": "dry mode — no network"
+      }
+    }
+  }
+}

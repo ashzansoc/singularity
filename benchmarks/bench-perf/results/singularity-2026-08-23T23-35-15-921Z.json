@@ -1,0 +1,129 @@
+{
+  "ts": "2026-08-23T23:34:35.383Z",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "maxTokens": 160,
+  "temp": 0.2,
+  "side": "singularity",
+  "fixtures": {
+    "explain": {
+      "singularity": {
+        "A": {
+          "runs": 1,
+          "okRuns": 1,
+          "ttftMeanMs": 20641,
+          "ttftP50Ms": 20641,
+          "totalMeanMs": 24803,
+          "totalP50Ms": 24803,
+          "tpsRenderedMean": 45.6,
+          "tpsRenderedP50": 45.6,
+          "tokensMean": 190,
+          "errors": []
+        },
+        "B": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "C": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        }
+      }
+    },
+    "plan": {
+      "singularity": {
+        "A": {
+          "runs": 1,
+          "okRuns": 1,
+          "ttftMeanMs": 1332,
+          "ttftP50Ms": 1332,
+          "totalMeanMs": 3368,
+          "totalP50Ms": 3368,
+          "tpsRenderedMean": 107.6,
+          "tpsRenderedP50": 107.6,
+          "tokensMean": 219,
+          "errors": []
+        },
+        "B": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "C": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        }
+      }
+    },
+    "edit": {
+      "singularity": {
+        "A": {
+          "runs": 1,
+          "okRuns": 1,
+          "ttftMeanMs": 9951,
+          "ttftP50Ms": 9951,
+          "totalMeanMs": 12343,
+          "totalP50Ms": 12343,
+          "tpsRenderedMean": 71.5,
+          "tpsRenderedP50": 71.5,
+          "tokensMean": 171,
+          "errors": []
+        },
+        "B": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "C": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+# Treat .env as a critical file — keep it out of merge normalization.
+# Explicitly tracked boundary file (always committed).
+.env.example binary

@@ -1,0 +1,425 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.connectors-hub-editor {
+	height: 100%;
+	background: #000000;
+	color: #ffffff;
+}
+
+.connectors-hub {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 28px 32px 24px;
+	overflow: hidden;
+	font-family: var(--vscode-font-family);
+}
+
+.connectors-hub-header {
+	flex: 0 0 auto;
+}
+
+.connectors-hub-title-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.connectors-hub-title {
+	margin: 0;
+	font-size: 28px;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+.connectors-hub-subtitle {
+	margin: 6px 0 0;
+	color: #a1a1a1;
+	font-size: 13px;
+}
+
+.connectors-hub-search-row .monaco-inputbox {
+	width: 100%;
+	max-width: 520px;
+}
+
+.connectors-hub-categories {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 16px 0 8px;
+}
+
+.connectors-hub-chip {
+	appearance: none;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	background: transparent;
+	color: #d4d4d4;
+	border-radius: 999px;
+	padding: 5px 12px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.connectors-hub-chip.active,
+.connectors-hub-chip:hover {
+	background: rgba(255, 255, 255, 0.08);
+	color: #ffffff;
+}
+
+.connectors-hub-body {
+	flex: 1 1 auto;
+	overflow: auto;
+	padding-right: 4px;
+}
+
+.connectors-hub-section {
+	margin: 28px 0;
+}
+
+.connectors-hub-section-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-bottom: 14px;
+}
+
+.connectors-hub-section-header h2 {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.connectors-hub-section-header p {
+	margin: 4px 0 0;
+	color: #8c8c8c;
+	font-size: 12px;
+}
+
+.connectors-hub-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.connectors-hub-card {
+	display: flex;
+	flex-direction: column;
+	min-height: 168px;
+	padding: 14px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	background: #111111;
+	cursor: pointer;
+	outline: none;
+}
+
+.connectors-hub-card:hover,
+.connectors-hub-card:focus {
+	border-color: rgba(255, 255, 255, 0.22);
+}
+
+.connectors-hub-card.skeleton {
+	min-height: 168px;
+	background: linear-gradient(90deg, #111 0%, #1a1a1a 50%, #111 100%);
+	background-size: 200% 100%;
+	animation: connectors-hub-shimmer 1.2s ease-in-out infinite;
+	cursor: default;
+}
+
+@keyframes connectors-hub-shimmer {
+	0% { background-position: 100% 0; }
+	100% { background-position: -100% 0; }
+}
+
+.connectors-hub-card-header {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.connectors-hub-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	overflow: hidden;
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #1c1c1c;
+}
+
+.connectors-hub-icon img {
+	width: 32px;
+	height: 32px;
+	object-fit: cover;
+}
+
+.connectors-hub-card-title {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 650;
+	color: #ffffff;
+}
+
+.connectors-hub-card-title h1 {
+	margin: 0;
+	font-size: 24px;
+}
+
+.connectors-hub-card-publisher,
+.connectors-hub-added,
+.connectors-hub-card-description {
+	color: #9a9a9a;
+	font-size: 12px;
+}
+
+.connectors-hub-card-description {
+	margin: 10px 0 0;
+	line-height: 1.45;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	flex: 1 1 auto;
+}
+
+.connectors-hub-card-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+.connectors-hub-card-meta {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+}
+
+.connectors-hub-stars {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	color: #f5c518;
+	font-size: 12px;
+}
+
+.connectors-hub-empty {
+	padding: 48px 12px;
+	text-align: center;
+	color: #b0b0b0;
+}
+
+.connectors-hub-empty h2 {
+	margin: 0 0 8px;
+	color: #ffffff;
+}
+
+.connectors-hub-add-actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex: 0 0 auto;
+}
+
+.connectors-hub-header-compact .connectors-hub-search-row,
+.connectors-hub-header-compact .connectors-hub-categories {
+	display: none;
+}
+
+.connectors-hub-custom {
+	max-width: 720px;
+	margin: 8px 0 32px;
+}
+
+.connectors-hub-custom h2 {
+	margin: 16px 0 8px;
+	font-size: 22px;
+	font-weight: 700;
+}
+
+.connectors-hub-custom-hint {
+	margin: 0 0 22px;
+	color: #9a9a9a;
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+.connectors-hub-custom-identity {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	margin-bottom: 20px;
+}
+
+.connectors-hub-custom-logo {
+	width: 64px;
+	height: 64px;
+	border-radius: 14px;
+	overflow: hidden;
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #1c1c1c;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.connectors-hub-custom-logo img {
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+}
+
+.connectors-hub-custom-logo .codicon {
+	font-size: 28px !important;
+}
+
+.connectors-hub-custom-identity-fields {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.connectors-hub-field-label {
+	display: block;
+	margin: 0 0 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #d0d0d0;
+	letter-spacing: 0.02em;
+}
+
+.connectors-hub-field-input {
+	width: 100%;
+	box-sizing: border-box;
+	appearance: none;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: #111;
+	color: #fff;
+	border-radius: 8px;
+	padding: 10px 12px;
+	font-size: 14px;
+	outline: none;
+}
+
+.connectors-hub-field-input:focus,
+.connectors-hub-json:focus {
+	border-color: rgba(255, 255, 255, 0.35);
+}
+
+.connectors-hub-field-meta {
+	margin: 8px 0 0;
+	color: #8c8c8c;
+	font-size: 12px;
+}
+
+.connectors-hub-json {
+	width: 100%;
+	min-height: 220px;
+	box-sizing: border-box;
+	appearance: none;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: #0d0d0d;
+	color: #d7d7d7;
+	border-radius: 10px;
+	padding: 14px;
+	font-family: var(--monaco-monospace-font, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+	font-size: 12.5px;
+	line-height: 1.5;
+	resize: vertical;
+	outline: none;
+}
+
+.connectors-hub-custom-error {
+	margin: 12px 0 0;
+	color: #ff8e8e;
+	font-size: 13px;
+}
+
+.connectors-hub-custom-actions {
+	display: flex;
+	gap: 10px;
+	margin-top: 18px;
+}
+
+.connectors-hub-empty .monaco-button {
+	margin: 16px 6px 0;
+}
+
+.connectors-hub-request {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	color: #9a9a9a;
+	margin: 8px 0 24px;
+}
+
+.connectors-hub-detail-hero {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin: 16px 0 24px;
+}
+
+.connectors-hub-detail-copy {
+	flex: 1 1 auto;
+}
+
+.connectors-hub-detail-section {
+	margin: 0 0 22px;
+}
+
+.connectors-hub-detail-section h3 {
+	margin: 0 0 8px;
+	font-size: 16px;
+}
+
+.connectors-hub-detail-section p {
+	margin: 0;
+	white-space: pre-line;
+	color: #b5b5b5;
+	line-height: 1.5;
+}
+
+.connectors-hub-tech-toggle {
+	appearance: none;
+	background: none;
+	border: none;
+	color: #d0d0d0;
+	cursor: pointer;
+	padding: 0;
+	font-size: 13px;
+}
+
+.connectors-hub-tech pre {
+	margin: 10px 0 0;
+	padding: 12px;
+	border-radius: 8px;
+	background: #111;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	color: #c8c8c8;
+}
+
+.connectors-hub-success-actions {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 16px;
+}
+
+@media (max-width: 1100px) {
+	.connectors-hub-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}

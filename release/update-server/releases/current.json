@@ -1,0 +1,43 @@
+{
+  "latestVersion": "1.134.4",
+  "minSupportedVersion": "1.134.2",
+  "commit": "83ad2f6b310ef62b1f20647bccaa511d17b4398a",
+  "quality": "stable",
+  "mandatory": true,
+  "releaseNotesUrl": "https://github.com/ashzansoc/singularity-releases/releases/tag/v1.134.4",
+  "platforms": {
+    "darwin": {
+      "zip": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-darwin-arm64.zip",
+      "dmg": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-1.134.4-darwin-arm64.dmg",
+      "patch": {
+        "fromVersion": "1.134.3",
+        "url": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-patch-1.134.3-to-1.134.4-darwin-arm64.zip",
+        "size": 91695393,
+        "sha256": "d0c753c9657bbc1f585c631c61aa7366b7fe0febbd71e0d9aebad566284a2d5e",
+        "fileCount": 49
+      }
+    },
+    "darwin-arm64": {
+      "zip": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-darwin-arm64.zip",
+      "dmg": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-1.134.4-darwin-arm64.dmg",
+      "patch": {
+        "fromVersion": "1.134.3",
+        "url": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-patch-1.134.3-to-1.134.4-darwin-arm64.zip",
+        "size": 91695393,
+        "sha256": "d0c753c9657bbc1f585c631c61aa7366b7fe0febbd71e0d9aebad566284a2d5e",
+        "fileCount": 49
+      }
+    },
+    "darwin-universal": {
+      "zip": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-darwin-arm64.zip",
+      "dmg": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-1.134.4-darwin-arm64.dmg",
+      "patch": {
+        "fromVersion": "1.134.3",
+        "url": "https://github.com/ashzansoc/singularity-releases/releases/download/v1.134.4/Singularity-patch-1.134.3-to-1.134.4-darwin-arm64.zip",
+        "size": 91695393,
+        "sha256": "d0c753c9657bbc1f585c631c61aa7366b7fe0febbd71e0d9aebad566284a2d5e",
+        "fileCount": 49
+      }
+    }
+  }
+}

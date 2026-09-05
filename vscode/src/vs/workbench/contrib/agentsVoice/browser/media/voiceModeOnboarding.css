@@ -1,0 +1,292 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/*
+ * Voice Mode introduction card — layout mirrors dictation onboarding so the
+ * two cards read as the same family sitting above the chat input.
+ */
+
+.has-voice-mode-onboarding {
+	display: block;
+}
+
+.voice-mode-onboarding-banner {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--vscode-spacing-size120);
+	box-sizing: border-box;
+	padding: var(--vscode-spacing-size160);
+	border: var(--vscode-strokeThickness) solid var(--vscode-input-border, var(--vscode-widget-border, transparent));
+	border-radius: var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-xSmall) var(--vscode-cornerRadius-xSmall);
+	background-color: var(--vscode-agentsChatInput-background, var(--vscode-input-background));
+	color: var(--vscode-foreground);
+}
+
+.voice-mode-onboarding-copy {
+	display: flex;
+	flex-direction: column;
+	gap: var(--vscode-spacing-size40);
+	min-width: 0;
+	padding-right: var(--vscode-spacing-size240);
+}
+
+.voice-mode-onboarding-title {
+	font-size: var(--vscode-fontSize-label1);
+	font-weight: var(--vscode-fontWeight-semiBold);
+}
+
+.voice-mode-onboarding-description {
+	font-size: var(--vscode-fontSize-label2);
+	color: var(--vscode-descriptionForeground);
+	line-height: 1.45;
+}
+
+.voice-mode-onboarding-description a {
+	color: var(--vscode-textLink-foreground);
+	cursor: pointer;
+}
+
+.voice-mode-onboarding-description a:hover,
+.voice-mode-onboarding-description a:active {
+	color: var(--vscode-textLink-activeForeground);
+	text-decoration: underline;
+}
+
+.voice-mode-onboarding-description a:focus-visible {
+	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline-offset: 2px;
+	border-radius: var(--vscode-cornerRadius-xSmall);
+}
+
+.voice-mode-onboarding-wave {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--vscode-spacing-size280);
+	min-width: 0;
+	opacity: 0.85;
+	mask-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, transparent);
+}
+
+.voice-mode-onboarding-canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.voice-mode-onboarding-microphone-picker {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--vscode-spacing-size60);
+	box-sizing: border-box;
+	min-width: 0;
+	height: var(--vscode-spacing-size280);
+	padding: 0 var(--vscode-spacing-size80);
+	border: var(--vscode-strokeThickness) solid var(--vscode-dropdown-border, var(--vscode-input-border, transparent));
+	border-radius: var(--vscode-cornerRadius-small);
+	background-color: var(--vscode-dropdown-background, var(--vscode-input-background));
+}
+
+.voice-mode-onboarding-microphone-picker[hidden] {
+	display: none;
+}
+
+.voice-mode-onboarding-microphone-picker:hover {
+	border-color: var(--vscode-focusBorder);
+}
+
+.voice-mode-onboarding-microphone-picker:focus-within {
+	border-color: var(--vscode-focusBorder);
+	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline-offset: -2px;
+}
+
+.monaco-workbench .voice-mode-onboarding-microphone-icon.codicon[class*='codicon-'] {
+	flex-shrink: 0;
+	font-size: var(--vscode-codiconFontSize-compact);
+	line-height: 1;
+	color: var(--vscode-descriptionForeground);
+}
+
+.voice-mode-onboarding-microphone-picker .monaco-select-box {
+	flex: 1 1 auto;
+	min-width: 0;
+	height: 100%;
+	padding: 0;
+	border: none;
+	border-radius: var(--vscode-cornerRadius-small);
+	background-color: transparent;
+	color: var(--vscode-dropdown-foreground, var(--vscode-foreground));
+	font-family: inherit;
+	font-size: var(--vscode-fontSize-label2);
+	text-overflow: ellipsis;
+}
+
+.voice-mode-onboarding-microphone-picker .monaco-select-box:focus {
+	outline: none;
+}
+
+.voice-mode-onboarding-actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--vscode-spacing-size80);
+	min-width: 0;
+}
+
+.voice-mode-onboarding-voices-label {
+	font-size: var(--vscode-fontSize-label2);
+	color: var(--vscode-descriptionForeground);
+}
+
+.voice-mode-onboarding-voices {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--vscode-spacing-size80);
+	min-width: 0;
+}
+
+.voice-mode-onboarding-voice {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--vscode-spacing-size60);
+	box-sizing: border-box;
+	min-width: 0;
+	padding: var(--vscode-spacing-size60) var(--vscode-spacing-size100);
+	border: var(--vscode-strokeThickness) solid var(--vscode-input-border, var(--vscode-widget-border, transparent));
+	border-radius: var(--vscode-cornerRadius-small);
+	background-color: var(--vscode-input-background);
+	color: var(--vscode-foreground);
+	cursor: pointer;
+	user-select: none;
+}
+
+.voice-mode-onboarding-voice:hover {
+	background-color: var(--vscode-toolbar-hoverBackground);
+}
+
+.voice-mode-onboarding-voice:focus-visible {
+	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline-offset: -1px;
+}
+
+.voice-mode-onboarding-voice.selected {
+	border-color: var(--vscode-focusBorder);
+	background-color: var(--vscode-list-activeSelectionBackground, var(--vscode-toolbar-hoverBackground));
+	color: var(--vscode-list-activeSelectionForeground, var(--vscode-foreground));
+}
+
+.voice-mode-onboarding-voice.playing {
+	border-color: var(--vscode-focusBorder);
+}
+
+.voice-mode-onboarding-voice-label {
+	font-size: var(--vscode-fontSize-label2);
+	line-height: 1.2;
+}
+
+.voice-mode-onboarding-voice-icon {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--vscode-spacing-size160);
+	height: var(--vscode-spacing-size160);
+	flex-shrink: 0;
+}
+
+.monaco-workbench .voice-mode-onboarding-voice-icon .codicon[class*='codicon-'] {
+	font-size: var(--vscode-codiconFontSize-compact);
+	line-height: 1;
+	color: inherit;
+}
+
+.voice-mode-onboarding-voice-idle {
+	display: inline-flex;
+}
+
+.voice-mode-onboarding-voice-chosen,
+.voice-mode-onboarding-voice-bars {
+	display: none;
+}
+
+.voice-mode-onboarding-voice.selected .voice-mode-onboarding-voice-idle {
+	display: none;
+}
+
+.voice-mode-onboarding-voice.selected .voice-mode-onboarding-voice-chosen {
+	display: inline-flex;
+}
+
+.voice-mode-onboarding-voice.playing .voice-mode-onboarding-voice-idle,
+.voice-mode-onboarding-voice.playing .voice-mode-onboarding-voice-chosen {
+	display: none;
+}
+
+.voice-mode-onboarding-voice.playing .voice-mode-onboarding-voice-bars {
+	display: inline-flex;
+	align-items: flex-end;
+	gap: 2px;
+	height: 100%;
+}
+
+.voice-mode-onboarding-voice-bar {
+	width: 2px;
+	height: 60%;
+	border-radius: var(--vscode-cornerRadius-circle);
+	background: currentColor;
+	animation: voice-mode-onboarding-bar-pulse 900ms ease-in-out infinite;
+}
+
+.voice-mode-onboarding-voice-bar:nth-child(2) {
+	animation-delay: 150ms;
+	height: 100%;
+}
+
+.voice-mode-onboarding-voice-bar:nth-child(3) {
+	animation-delay: 300ms;
+	height: 40%;
+}
+
+@keyframes voice-mode-onboarding-bar-pulse {
+	0%,
+	100% {
+		transform: scaleY(0.45);
+	}
+	50% {
+		transform: scaleY(1);
+	}
+}
+
+.voice-mode-onboarding-close {
+	position: absolute;
+	top: var(--vscode-spacing-size80);
+	right: var(--vscode-spacing-size80);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--vscode-spacing-size240);
+	height: var(--vscode-spacing-size240);
+	border-radius: var(--vscode-cornerRadius-small);
+	color: var(--vscode-foreground);
+	cursor: pointer;
+	transition: background-color 100ms ease-out;
+}
+
+.voice-mode-onboarding-close:hover {
+	background-color: var(--vscode-toolbar-hoverBackground);
+}
+
+.voice-mode-onboarding-close:focus-visible {
+	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline-offset: -1px;
+}
+
+.monaco-workbench .voice-mode-onboarding-close .codicon[class*='codicon-'] {
+	font-size: var(--vscode-codiconFontSize);
+	line-height: 1;
+	color: inherit;
+}

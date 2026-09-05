@@ -1,0 +1,41 @@
+{
+  "name": "@singularity/intelligence",
+  "version": "0.1.0",
+  "description": "Singularity Context Intelligence Layer — local daemon, graph store, hybrid retrieval",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.json && node --test --test-force-exit test/intelligence.test.mjs",
+    "test:watch": "node --test --watch test/intelligence.test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.1",
+    "@singularity/prompt": "file:../prompt",
+    "@singularity/architecture": "file:../architecture",
+    "@singularity/memory": "file:../memory",
+    "@singularity/outcome": "file:../outcome",
+    "hono": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "license": "MIT"
+}

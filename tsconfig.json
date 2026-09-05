@@ -1,0 +1,19 @@
+{
+  // Keep the root folder out of a single giant TS project: the VSCode fork
+  // has its own configs under vscode/src and each package builds standalone.
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true
+  },
+  "include": ["scripts/**/*", "*.mjs"],
+  "exclude": [
+    "vscode",
+    "packages",
+    "node_modules",
+    "**/node_modules",
+    "**/dist",
+    "**/.build"
+  ]
+}

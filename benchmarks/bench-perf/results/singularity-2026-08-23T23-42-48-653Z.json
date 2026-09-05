@@ -1,0 +1,135 @@
+{
+  "ts": "2026-08-23T23:42:18.575Z",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "maxTokens": 300,
+  "temp": 0.2,
+  "side": "singularity",
+  "fixtures": {
+    "explain": {
+      "singularity": {
+        "A": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "B": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "C": {
+          "runs": 1,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": [
+            "ProviderError: AI gateway error 400"
+          ]
+        }
+      }
+    },
+    "plan": {
+      "singularity": {
+        "A": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "B": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "C": {
+          "runs": 1,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": [
+            "ProviderError: AI gateway error 400"
+          ]
+        }
+      }
+    },
+    "edit": {
+      "singularity": {
+        "A": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "B": {
+          "runs": 0,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": []
+        },
+        "C": {
+          "runs": 1,
+          "okRuns": 0,
+          "ttftMeanMs": 0,
+          "ttftP50Ms": 0,
+          "totalMeanMs": 0,
+          "totalP50Ms": 0,
+          "tpsRenderedMean": 0,
+          "tpsRenderedP50": 0,
+          "tokensMean": 0,
+          "errors": [
+            "ProviderError: AI gateway error 400"
+          ]
+        }
+      }
+    }
+  }
+}

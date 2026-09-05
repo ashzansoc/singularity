@@ -1,0 +1,110 @@
+{
+  "startedAt": "2026-08-22T03:19:39.750Z",
+  "mode": "dry",
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "runs": 5,
+  "maxTokens": 128,
+  "tiers": {
+    "A": {
+      "explain": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 2,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 68,
+        "totalP50Ms": 68,
+        "errors": []
+      },
+      "single-file-edit": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 66,
+        "totalP50Ms": 66,
+        "errors": []
+      },
+      "multi-file-goal": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 66,
+        "totalP50Ms": 66,
+        "errors": []
+      }
+    },
+    "B": {
+      "explain": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 67,
+        "totalP50Ms": 67,
+        "errors": []
+      },
+      "single-file-edit": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 67,
+        "totalP50Ms": 67,
+        "errors": []
+      },
+      "multi-file-goal": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 67,
+        "totalP50Ms": 67,
+        "errors": []
+      }
+    },
+    "C": {
+      "explain": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 1,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 69,
+        "totalP50Ms": 67,
+        "errors": []
+      },
+      "single-file-edit": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 68,
+        "totalP50Ms": 68,
+        "errors": []
+      },
+      "multi-file-goal": {
+        "runs": 5,
+        "okRuns": 5,
+        "ttftMeanMs": 0,
+        "ttftP50Ms": 0,
+        "totalMeanMs": 70,
+        "totalP50Ms": 69,
+        "errors": []
+      }
+    }
+  },
+  "attribution": {
+    "explain": {
+      "providerOverheadMs": -1,
+      "routingAndPipelineMs": 0
+    },
+    "single-file-edit": {
+      "providerOverheadMs": 1,
+      "routingAndPipelineMs": 1
+    },
+    "multi-file-goal": {
+      "providerOverheadMs": 1,
+      "routingAndPipelineMs": 2
+    }
+  }
+}

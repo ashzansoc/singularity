@@ -1,0 +1,19 @@
+{
+  "$comment": "Performance budgets derived from measured baselines. Live: 2026-08-21 deepseek/deepseek-v4-flash-0731 runs=1 (see README.md baseline table). Dry: 2026-08-21 runs=5 post-optimization (see METRICS.json). Headroom: ~1s on live network numbers (gateway jitter), 2-4x on dry in-process numbers. Update ONLY from a fresh measured baseline, never to make a failing check pass.",
+  "derivedFrom": {
+    "live": { "date": "2026-08-21", "model": "deepseek/deepseek-v4-flash-0731", "runs": 1 },
+    "dry": { "date": "2026-08-21", "model": "deepseek/deepseek-v4-flash-0731", "runs": 5 }
+  },
+  "live": {
+    "providerOverheadP50MsMax": 2500,
+    "routingAndPipelineP50MsMax": 2000,
+    "tierCTotalP50MsMax": 6000,
+    "tierCTtftP50MsMax": 4000
+  },
+  "dry": {
+    "tierBTotalP50MsMax": 150,
+    "tierCTotalP50MsMax": 250,
+    "tierCTtftP50MsMax": 100,
+    "routingOverheadP50MsMax": 100
+  }
+}

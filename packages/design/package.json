@@ -1,0 +1,39 @@
+{
+  "name": "@singularity/design",
+  "version": "0.1.0",
+  "description": "Frontend Design Intelligence — Design Director, Spec, Flash implementer, Visual Critic, Design DNA",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "knowledge",
+    "agency-skills",
+    "mcp",
+    "refs/README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "install-refs": "bash ../../scripts/install-design-refs.sh",
+    "fetch-agency-skills": "node scripts/fetch-agency-skills.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "license": "MIT"
+}

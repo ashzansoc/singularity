@@ -1,0 +1,572 @@
+{
+	"name": "singularity-chat",
+	"displayName": "GitHub Singularity Chat",
+	"description": "AI chat features powered by Singularity",
+	"version": "0.12.0",
+	"build": "1",
+	"internalAIKey": "1058ec22-3c95-4951-8443-f26c1f325911",
+	"ariaKey": "0c6ae279ed8443289764825290e4f9e2-1a736e7c-1324-4338-be46-fc2a58ae4d14-7255",
+	"buildType": "dev",
+	"publisher": "GitHub",
+	"homepage": "https://github.com/features/singularity",
+	"license": "SEE LICENSE IN LICENSE.txt",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/vscode-singularity-release"
+	},
+	"bugs": {
+		"url": "https://aka.ms/microsoft/vscode-singularity-release"
+	},
+	"qna": "https://github.com/github-community/community/discussions/categories/singularity",
+	"icon": "assets/Singularity-App-Icon.png",
+	"pricing": "Trial",
+	"engines": {
+		"vscode": "^1.86.0",
+		"npm": ">=9.0.0",
+		"node": ">=18.0.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Machine Learning",
+		"Education",
+		"Snippets"
+	],
+	"keywords": [
+		"ai",
+		"openai",
+		"codex",
+		"pilot",
+		"snippets",
+		"documentation",
+		"autocomplete",
+		"intellisense",
+		"refactor",
+		"javascript",
+		"python",
+		"typescript",
+		"php",
+		"go",
+		"golang",
+		"ruby",
+		"c++",
+		"c#",
+		"java",
+		"kotlin",
+		"co-pilot"
+	],
+	"badges": [
+		{
+			"url": "https://img.shields.io/badge/GitHub%20Singularity-Subscription%20Required-orange",
+			"href": "https://github.com/github-singularity/signup",
+			"description": "%singularity.chat.badge.signUp%"
+		},
+		{
+			"url": "https://img.shields.io/github/stars/github/singularity-docs?style=social",
+			"href": "https://github.com/github/singularity-docs",
+			"description": "%singularity.chat.badge.star%"
+		},
+		{
+			"url": "https://img.shields.io/youtube/channel/views/UC7c3Kb6jYCRj4JOHHZTxKsQ?style=social",
+			"href": "https://www.youtube.com/@GitHub/search?query=singularity",
+			"description": "%singularity.chat.badge.youtube%"
+		},
+		{
+			"url": "https://img.shields.io/twitter/follow/github?style=social",
+			"href": "https://twitter.com/github",
+			"description": "%singularity.chat.badge.twitter%"
+		}
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./dist/extension",
+	"l10n": "./l10n",
+	"enabledApiProposals": [
+		"interactive",
+		"chatProvider",
+		"codeActionAI",
+		"findTextInFiles",
+		"textSearchProvider",
+		"terminalDataWriteEvent",
+		"terminalExecuteCommandEvent",
+		"terminalSelection",
+		"terminalQuickFixProvider",
+		"readonlyMessage",
+		"mappedEditsProvider",
+		"aiRelatedInformation",
+		"chatAgents2",
+		"chatAgents2Additions",
+		"defaultChatAgent",
+		"contribSourceControlInputBoxMenu"
+	],
+	"contributes": {
+		"interactiveSession": [
+			{
+				"label": "GitHub Singularity",
+				"id": "singularity",
+				"icon": "",
+				"when": "!singularity.chat.interactiveSession.disabled"
+			}
+		],
+		"viewsWelcome": [
+			{
+				"view": "workbench.panel.chat.view.singularity",
+				"contents": "%singularity.chat.viewsWelcome.signIn%",
+				"when": "!singularity.chat-chat.activated && !singularity.chat.offline && !singularity.chat.interactiveSession.individual.disabled && !singularity.chat.interactiveSession.individual.expired && !singularity.chat.interactiveSession.enterprise.disabled"
+			},
+			{
+				"view": "workbench.panel.chat.view.singularity",
+				"contents": "%singularity.chat.viewsWelcome.individual%",
+				"when": "singularity.chat.interactiveSession.individual.disabled"
+			},
+			{
+				"view": "workbench.panel.chat.view.singularity",
+				"contents": "%singularity.chat.viewsWelcome.individual.expired%",
+				"when": "singularity.chat.interactiveSession.individual.expired"
+			},
+			{
+				"view": "workbench.panel.chat.view.singularity",
+				"contents": "%singularity.chat.viewsWelcome.enterprise%",
+				"when": "singularity.chat.interactiveSession.enterprise.disabled"
+			},
+			{
+				"view": "workbench.panel.chat.view.singularity",
+				"contents": "%singularity.chat.viewsWelcome.offline%",
+				"when": "singularity.chat.offline"
+			}
+		],
+		"commands": [
+			{
+				"command": "singularity.chat.interactiveEditor.explain",
+				"title": "%singularity.chat.command.explainThis%",
+				"enablement": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.interactiveEditor.generate",
+				"title": "%singularity.chat.command.generateThis%",
+				"enablement": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.interactiveEditor.generateDocs",
+				"title": "%singularity.chat.command.generateDocs%",
+				"enablement": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.interactiveEditor.generateTests",
+				"title": "%singularity.chat.command.generateTests%",
+				"enablement": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.interactiveEditor.fix",
+				"title": "%singularity.chat.command.fixThis%",
+				"enablement": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.interactiveSession.feedback",
+				"title": "%singularity.chat.command.sendChatFeedback%",
+				"enablement": "singularity.chat-chat.activated && !singularity.chat.interactiveSession.disabled",
+				"icon": "$(feedback)",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.debug.workbenchState",
+				"title": "%singularity.chat.command.logWorkbenchState%",
+				"category": "Developer"
+			},
+			{
+				"command": "singularity.chat.ghpr.applySuggestion",
+				"title": "%singularity.chat.command.applySuggestionWithSingularity%",
+				"icon": "$(sparkle)",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.terminal.explainTerminalSelection",
+				"title": "%singularity.chat.command.explainTerminalSelection%",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.terminal.explainTerminalSelectionContextMenu",
+				"title": "%singularity.chat.command.explainTerminalSelectionContextMenu%",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.terminal.explainTerminalLastCommand",
+				"title": "%singularity.chat.command.explainTerminalLastCommand%",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.terminal.suggestCommand",
+				"title": "%singularity.chat.command.suggestCommand%",
+				"category": "GitHub Singularity"
+			},
+			{
+				"command": "singularity.chat.git.generateCommitMessage",
+				"title": "%singularity.chat.git.generateCommitMessage%",
+				"icon": "$(sparkle)",
+				"category": "GitHub Singularity"
+			}
+		],
+		"configuration": {
+			"title": "Singularity",
+			"properties": {
+				"singularity.chat.editor.enableCodeActions": {
+					"type": "boolean",
+					"default": true,
+					"description": "%singularity.chat.config.enableCodeActions%"
+				},
+				"singularity.chat.chat.localeOverride": {
+					"type": "string",
+					"enum": [
+						"auto",
+						"en",
+						"fr",
+						"it",
+						"de",
+						"es",
+						"ru",
+						"zh-CN",
+						"zh-TW",
+						"ja",
+						"ko",
+						"cs",
+						"pt-br",
+						"tr",
+						"pl"
+					],
+					"enumDescriptions": [
+						"Use VS Code's configured display language",
+						"English",
+						"français",
+						"italiano",
+						"Deutsch",
+						"español",
+						"русский",
+						"中文(简体)",
+						"中文(繁體)",
+						"日本語",
+						"한국어",
+						"čeština",
+						"português",
+						"Türkçe",
+						"polski"
+					],
+					"default": "auto",
+					"markdownDescription": "%singularity.chat.config.localeOverride%"
+				},
+				"singularity.chat.chat.welcomeMessage": {
+					"type": "string",
+					"default": "first",
+					"markdownDescription": "%singularity.chat.config.welcomeMessage%",
+					"markdownEnumDescriptions": [
+						"%singularity.chat.config.welcomeMessage.first%",
+						"%singularity.chat.config.welcomeMessage.always%",
+						"%singularity.chat.config.welcomeMessage.never%"
+					],
+					"enum": [
+						"first",
+						"always",
+						"never"
+					]
+				}
+			}
+		},
+		"configurationDefaults": {
+			"terminal.integrated.commandsToSkipShell": [
+				"singularity.chat.terminal.suggestCommand"
+			]
+		},
+		"keybindings": [
+			{
+				"command": "singularity.chat.terminal.suggestCommand",
+				"key": "ctrl+i",
+				"mac": "cmd+i",
+				"when": "terminalFocus"
+			}
+		],
+		"submenus": [
+			{
+				"id": "singularity",
+				"label": "Singularity"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"submenu": "singularity",
+					"when": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+					"group": "1_singularity@0"
+				}
+			],
+			"singularity": [
+				{
+					"command": "inlineChat.start",
+					"when": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+					"group": "singularity@1"
+				},
+				{
+					"command": "singularity.chat.interactiveEditor.explain",
+					"when": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+					"group": "singularityAction@1"
+				},
+				{
+					"command": "singularity.chat.interactiveEditor.fix",
+					"when": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+					"group": "singularityAction@2"
+				},
+				{
+					"command": "singularity.chat.interactiveEditor.generateDocs",
+					"when": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+					"group": "singularityAction@3"
+				},
+				{
+					"command": "singularity.chat.interactiveEditor.generateTests",
+					"when": "!singularity.chat.interactiveSession.disabled && !editorReadonly",
+					"group": "singularityAction@4"
+				}
+			],
+			"terminal/context": [
+				{
+					"command": "singularity.chat.terminal.explainTerminalSelectionContextMenu",
+					"group": "1_singularity@0"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "singularity.chat.interactiveSession.feedback",
+					"when": "singularity.chat-chat.activated && !singularity.chat.interactiveSession.disabled"
+				},
+				{
+					"command": "singularity.chat.debug.workbenchState",
+					"when": "true"
+				},
+				{
+					"command": "singularity.chat.terminal.explainTerminalSelectionContextMenu",
+					"when": "false"
+				},
+				{
+					"command": "singularity.chat.git.generateCommitMessage",
+					"when": "false"
+				}
+			],
+			"view/title": [
+				{
+					"command": "singularity.chat.interactiveSession.feedback",
+					"when": "view == workbench.panel.chat.view.singularity",
+					"group": "navigation"
+				}
+			],
+			"comments/comment/title": [
+				{
+					"command": "singularity.chat.ghpr.applySuggestion",
+					"title": "Apply Suggestion with Singularity",
+					"group": "inline@0",
+					"when": "commentController =~ /^github-review/ && !(comment =~ /hasSuggestion/)"
+				}
+			],
+			"scm/inputBox": [
+				{
+					"command": "singularity.chat.git.generateCommitMessage",
+					"when": "scmProvider == git"
+				}
+			]
+		},
+		"icons": {
+			"singularity-logo": {
+				"description": "%singularity.chat.icon%",
+				"default": {
+					"fontPath": "assets/singularity.woff",
+					"fontCharacter": "\\0041"
+				}
+			},
+			"singularity-warning": {
+				"description": "%singularity.chat.icon%",
+				"default": {
+					"fontPath": "assets/singularity.woff",
+					"fontCharacter": "\\0042"
+				}
+			},
+			"singularity-notconnected": {
+				"description": "%singularity.chat.icon%",
+				"default": {
+					"fontPath": "assets/singularity.woff",
+					"fontCharacter": "\\0043"
+				}
+			}
+		},
+		"iconFonts": [
+			{
+				"id": "singularity-font",
+				"src": [
+					{
+						"path": "assets/singularity.woff",
+						"format": "woff"
+					}
+				]
+			}
+		],
+		"terminalQuickFixes": [
+			{
+				"id": "singularity-chat.fixWithSingularity",
+				"commandLineMatcher": ".+",
+				"commandExitResult": "error",
+				"outputMatcher": {
+					"anchor": "bottom",
+					"length": 1,
+					"lineMatcher": ".+",
+					"offset": 0
+				},
+				"kind": "explain"
+			},
+			{
+				"id": "singularity-chat.generateCommitMessage",
+				"commandLineMatcher": "git add .+",
+				"commandExitResult": "success",
+				"kind": "explain",
+				"outputMatcher": {
+					"anchor": "bottom",
+					"length": 1,
+					"lineMatcher": ".+",
+					"offset": 0
+				}
+			}
+		]
+	},
+	"extensionPack": [
+		"Singularity.singularity"
+	],
+	"scripts": {
+		"postinstall": "tsx ./script/postinstall.ts",
+		"prepare": "tsx script/setup/prepare.ts",
+		"husky:install": "husky install",
+		"vscode:prepublish": "npm run build",
+		"vscode-dts:dev": "npx vscode-dts dev && mv vscode.proposed.*.ts src/extension",
+		"build": "tsx .esbuild.ts",
+		"compile": "tsx .esbuild.ts --dev",
+		"watch": "npm-run-all -p watch:*",
+		"watch:esbuild": "tsx .esbuild.ts --watch --dev",
+		"watch:tsc-extension": "tsc --noEmit --watch --project tsconfig.json",
+		"watch:tsc-simulation-workbench": "tsc --noEmit --watch --project test/simulation/workbench/tsconfig.json",
+		"typecheck": "tsc --noEmit -project tsconfig.json && tsc --noEmit --project test/simulation/workbench/tsconfig.json",
+		"lint": "eslint src test --max-warnings=0 --ext ts",
+		"lint-staged": "eslint src test --ext ts",
+		"tsfmt": "node tsfmt ./tsfmt.json -r --verify",
+		"test": "npm-run-all test:*",
+		"test:extension": "vscode-test --code-version=insiders --timeout=5000",
+		"test:unit": "mocha -u tdd dist/test-unit.js --require source-map-support/register --exit --timeout=5000",
+		"test:unit_jest": "jest",
+		"get_token": "tsx script/setup/getToken.mts",
+		"patch-release": "tsx script/build/applyPatchForRelease.ts",
+		"patch-prerelease": "tsx script/build/applyPatchForRelease.ts -- --prerelease",
+		"prettier": "prettier --list-different --write --cache .",
+		"simulate": "node dist/simulationMain.js",
+		"simulate-ci": "node dist/simulationMain.js --ci --require-cache",
+		"simulate-baseline": "node dist/simulationMain.js --update-baseline",
+		"setup": "python script/setup/setup.py && npm run get_token",
+		"setup:dotnet": "run-script-os",
+		"setup:dotnet:darwin:linux": "curl -O https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh && chmod u+x dotnet-install.sh && ./dotnet-install.sh --version latest --quality GA --channel STS && rm dotnet-install.sh",
+		"setup:dotnet:win32": "Invoke-WebRequest -Uri https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.ps1 && chmod u+x dotnet-install.ps1 && ./dotnet-install.ps1 --version latest --quality GA --channel STS && rm dotnet-install.ps1",
+		"aml": "python test/aml/run.py",
+		"package": "vsce package"
+	},
+	"devDependencies": {
+		"@fluentui/react-components": "^9.44.4",
+		"@fluentui/react-icons": "^2.0.224",
+		"@jest/globals": "^29.7.0",
+		"@nteract/messaging": "^7.0.20",
+		"@types/eslint": "8.44.8",
+		"@types/kerberos": "^1.1.5",
+		"@types/markdown-it": "^13.0.7",
+		"@types/minimist": "^1.2.5",
+		"@types/mocha": "^10.0.6",
+		"@types/node": "^20.10.3",
+		"@types/picomatch": "^2.3.3",
+		"@types/react": "17.0.44",
+		"@types/react-dom": "^18.2.17",
+		"@types/sinon": "^17.0.2",
+		"@types/tar": "^6.1.10",
+		"@types/vscode": "^1.85.0",
+		"@typescript-eslint/eslint-plugin": "^6.13.2",
+		"@typescript-eslint/parser": "^6.13.2",
+		"@typescript-eslint/typescript-estree": "^6.13.2",
+		"@vscode/dts": "^0.4.0",
+		"@vscode/test-cli": "^0.0.4",
+		"@vscode/test-electron": "^2.3.8",
+		"@vscode/vsce": "2.22.0",
+		"@vscode/zeromq": "0.2.0",
+		"csv-parse": "^5.5.2",
+		"dotenv": "^16.3.1",
+		"electron": "^27.1.3",
+		"esbuild": "^0.19.8",
+		"eslint": "^8.55.0",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-header": "^3.1.1",
+		"eslint-plugin-import": "^2.29.0",
+		"eslint-plugin-jsdoc": "^46.9.0",
+		"eslint-plugin-local": "^1.0.0",
+		"eslint-plugin-no-only-tests": "^3.1.0",
+		"glob": "^10.3.10",
+		"husky": "^8.0.3",
+		"jest": "^29.7.0",
+		"lint-staged": "^15.2.0",
+		"minimist": "^1.2.8",
+		"mobx": "^6.12.0",
+		"mobx-react-lite": "^4.0.5",
+		"mocha": "^10.2.0",
+		"monaco-editor": "0.44.0",
+		"npm-run-all": "^4.1.5",
+		"open": "^9.1.0",
+		"outdent": "^0.8.0",
+		"picomatch": "^3.0.1",
+		"prettier": "^2.8.7",
+		"react": "^17.0.2",
+		"react-dom": "17.0.2",
+		"run-script-os": "^1.1.6",
+		"sinon": "^17.0.1",
+		"tar": "^6.2.0",
+		"tree-sitter-c-sharp": "^0.20.0",
+		"tree-sitter-cli": "^0.20.8",
+		"tree-sitter-cpp": "^0.20.3",
+		"tree-sitter-go": "^0.20.0",
+		"tree-sitter-java": "^0.20.2",
+		"tree-sitter-javascript": "^0.20.1",
+		"tree-sitter-python": "^0.20.4",
+		"tree-sitter-ruby": "^0.19.0",
+		"tree-sitter-rust": "^0.20.4",
+		"tree-sitter-typescript": "^0.20.3",
+		"ts-dedent": "^2.2.0",
+		"ts-jest": "^29.1.1",
+		"ts-node": "^10.9.1",
+		"tsx": "^4.6.2",
+		"typescript": "^5.3.2",
+		"zeromq": "github:rebornix/zeromq.js#a19e8e373b3abc677f91b936d3f00d49b1b61792",
+		"zlib": "^1.0.5"
+	},
+	"dependencies": {
+		"@adobe/helix-fetch": "github:devm33/helix-fetch#eaa2f1344d93625e1bddb83d6846be5eea007e94",
+		"@humanwhocodes/gitignore-to-minimatch": "1.0.2",
+		"@microsoft/tiktokenizer": "^1.0.3",
+		"@roamhq/mac-ca": "^1.0.7",
+		"@vscode/extension-telemetry": "^0.9.1",
+		"@vscode/l10n": "^0.0.17",
+		"applicationinsights": "^2.9.1",
+		"ignore": "^5.3.0",
+		"isbinaryfile": "^5.0.0",
+		"jsonc-parser": "^3.2.0",
+		"markdown-it": "^14.0.0",
+		"minimatch": "^9.0.3",
+		"source-map-support": "^0.5.21",
+		"vscode-tas-client": "^0.1.75",
+		"web-tree-sitter": "^0.20.8"
+	},
+	"lint-staged": {
+		"!(test/simulation/fixtures/**|.test-scenarios/**)*.{ts,js}": [
+			"npm run tsfmt --",
+			"npm run lint-staged --"
+		]
+	}
+}

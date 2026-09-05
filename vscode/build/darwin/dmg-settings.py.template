@@ -1,0 +1,41 @@
+# dmgbuild settings template
+# Placeholders are replaced at build time
+
+volume_name = {{VOLUME_NAME}}
+format = 'ULMO'
+badge_icon = {{BADGE_ICON}}
+background = {{BACKGROUND}}
+
+# Volume size (app bundle + installer helpers; keep headroom for ditto copy)
+size = '2800m'
+shrink = False
+
+# Files and symlinks
+files = [{{APP_PATH}}, {{INSTALLER_PATH}}, {{README_PATH}}]
+symlinks = {
+	'Applications': '/Applications'
+}
+
+# Window settings
+show_status_bar = False
+show_tab_view = False
+show_toolbar = False
+show_pathbar = False
+show_sidebar = False
+sidebar_width = 180
+
+# Window position and size
+window_rect = ((100, 400), (560, 420))
+
+# Icon view settings
+default_view = 'icon-view'
+icon_locations = {
+	{{APP_NAME}}: (120, 200),
+	'Applications': (360, 200),
+	{{INSTALLER_NAME}}: (120, 60),
+	{{README_NAME}}: (360, 60)
+}
+
+# Text size for icon labels
+text_size = 12
+icon_size = 80

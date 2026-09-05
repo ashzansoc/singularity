@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-08-24T08:09:18.122Z",
+  "report": [
+    {
+      "scenario": "short_project",
+      "messages": 1,
+      "state_version": 1,
+      "raw_context_tokens": 710,
+      "retrieved_context_tokens": 97,
+      "extraction_input_tokens_est": 25,
+      "estimated_reduction_pct": 86.3,
+      "superseded": 0
+    },
+    {
+      "scenario": "requirement_change",
+      "messages": 3,
+      "state_version": 3,
+      "raw_context_tokens": 698,
+      "retrieved_context_tokens": 75,
+      "extraction_input_tokens_est": 31,
+      "estimated_reduction_pct": 89.3,
+      "superseded": 1
+    },
+    {
+      "scenario": "conflicting_instructions",
+      "messages": 3,
+      "state_version": 3,
+      "raw_context_tokens": 403,
+      "retrieved_context_tokens": 46,
+      "extraction_input_tokens_est": 18,
+      "estimated_reduction_pct": 88.6,
+      "superseded": 1
+    }
+  ]
+}

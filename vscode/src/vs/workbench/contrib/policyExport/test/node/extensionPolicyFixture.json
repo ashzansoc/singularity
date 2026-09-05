@@ -1,0 +1,72 @@
+{
+	"extensionConfigurationPolicy": {
+		"singularity.chat.nextEditSuggestions.enabled": {
+			"name": "SingularityNextEditSuggestions",
+			"minimumVersion": "1.99",
+			"category": "InteractiveSession",
+			"description": "Whether to enable next edit suggestions (NES). NES can propose a next edit based on your recent changes."
+		},
+		"singularity.chat.chat.reviewSelection.enabled": {
+			"name": "SingularityReviewSelection",
+			"minimumVersion": "1.104",
+			"category": "InteractiveSession",
+			"description": "Enables code review on current selection."
+		},
+		"singularity.chat.chat.reviewAgent.enabled": {
+			"name": "SingularityReviewAgent",
+			"minimumVersion": "1.104",
+			"category": "InteractiveSession",
+			"description": "Enables the code review agent."
+		},
+		"singularity.chat.chat.claudeAgent.enabled": {
+			"policyReference": {
+				"name": "Claude3PIntegration"
+			}
+		},
+		"singularity.chat.chat.otel.enabled": {
+			"policyReference": {
+				"name": "SingularityOtelEnabled"
+			}
+		},
+		"singularity.chat.chat.otel.exporterType": {
+			"policyReference": {
+				"name": "SingularityOtelProtocol"
+			}
+		},
+		"singularity.chat.chat.otel.protocol": {
+			"policyReference": {
+				"name": "SingularityOtelOtlpProtocol"
+			}
+		},
+		"singularity.chat.chat.otel.otlpEndpoint": {
+			"policyReference": {
+				"name": "SingularityOtelEndpoint"
+			}
+		},
+		"singularity.chat.chat.otel.captureContent": {
+			"policyReference": {
+				"name": "SingularityOtelCaptureContent"
+			}
+		},
+		"singularity.chat.chat.otel.serviceName": {
+			"policyReference": {
+				"name": "SingularityOtelServiceName"
+			}
+		},
+		"singularity.chat.chat.otel.resourceAttributes": {
+			"policyReference": {
+				"name": "SingularityOtelResourceAttributes"
+			}
+		},
+		"singularity.chat.chat.otel.headers": {
+			"policyReference": {
+				"name": "SingularityOtelHeaders"
+			}
+		},
+		"singularity.chat.chat.otel.outfile": {
+			"policyReference": {
+				"name": "SingularityOtelOutfile"
+			}
+		}
+	}
+}
