@@ -31,13 +31,11 @@ export class OpenRouterProvider implements IModelProvider {
     this.apiKey =
       config.apiKey ??
       process.env.OPENROUTER_API_KEY ??
-      process.env.AI_GATEWAY_API_KEY ??
-      process.env.VERCEL_AI_GATEWAY_API_KEY ??
+      process.env.TOKENROUTER_API_KEY ??
       '';
     this.baseUrl = (
       config.baseUrl ??
       process.env.OPENROUTER_BASE_URL ??
-      process.env.AI_GATEWAY_BASE_URL ??
       'https://openrouter.ai/api/v1'
     ).replace(/\/$/, '');
     this.fetchFn = config.fetch ?? fetch;
@@ -49,7 +47,7 @@ export class OpenRouterProvider implements IModelProvider {
     const viaProxy = this.baseUrl.includes('llm-proxy');
     if (!this.apiKey && !viaProxy) {
       throw new ProviderError(
-        'OPENROUTER_API_KEY (or AI_GATEWAY_API_KEY) is not set',
+        'OPENROUTER_API_KEY is not set',
       );
     }
 
@@ -115,7 +113,7 @@ export class OpenRouterProvider implements IModelProvider {
     const viaProxy = this.baseUrl.includes('llm-proxy');
     if (!this.apiKey && !viaProxy) {
       throw new ProviderError(
-        'OPENROUTER_API_KEY (or AI_GATEWAY_API_KEY) is not set',
+        'OPENROUTER_API_KEY is not set',
       );
     }
 

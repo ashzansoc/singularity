@@ -217,7 +217,6 @@ function hasOwnLlmCredentials(): boolean {
 	return !!(
 		process.env.OPENROUTER_API_KEY?.trim()
 		|| process.env.TOKENROUTER_API_KEY?.trim()
-		|| process.env.AI_GATEWAY_API_KEY?.trim()
 		|| process.env.DEEPSEEK_API_KEY?.trim()
 	);
 }

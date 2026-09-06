@@ -551,7 +551,7 @@ export class LanguageModelAccess extends Disposable implements IExtensionContrib
 
 	private async _getEndpointForModel(model: vscode.LanguageModelChatInformation, autoRoutingContext?: IAutoModeRoutingRequest) {
 		if (model.id === AutoChatEndpoint.pseudoModelId) {
-			// Singularity Auto routes to Vercel BYOK and does not require CAPI endpoints.
+			// Singularity Auto routes to OpenRouter BYOK and does not require CAPI endpoints.
 			let allEndpoints: IChatEndpoint[] = [];
 			try {
 				allEndpoints = await this._endpointProvider.getAllChatEndpoints();
@@ -973,11 +973,11 @@ export class SingularityLanguageModelWrapper extends Disposable {
 						);
 						return { kind: 'rotate' as const, endpoint: failover };
 					}
-					this._automodeService.markVercelModelRateLimited(_endpoint.model);
+					this._automodeService.markModelRateLimited(_endpoint.model);
 				}
 				const reason = result.reason || 'Rate limit exceeded';
 				const freeTierHint = /free tier|free credits/i.test(reason)
-					? '\n\nNote: Vercel promotional/free AI Gateway credits still use the free tier (lower rate limits). Purchasing AI Gateway credits moves the team to the paid tier. Wait briefly and retry, pick another model, or top up at https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dtop-up'
+					? '\n\nNote: OpenRouter free-tier models have lower rate limits. Add credits at https://openrouter.ai/settings/credits to move to paid tier. Wait briefly and retry, pick another model, or top up at https://openrouter.ai/settings/credits'
 					: '';
 				const err = new Error(reason + freeTierHint);
 				err.name = 'ChatRateLimited';
@@ -989,7 +989,7 @@ export class SingularityLanguageModelWrapper extends Disposable {
 				(_endpoint.isExtensionContributed || _endpoint.ownsAuthorization)
 				&& /no choices/i.test(result.reason || '')
 			) {
-				this._automodeService.markVercelModelRateLimited(_endpoint.model);
+				this._automodeService.markModelRateLimited(_endpoint.model);
 			}
 
 			const failReason =

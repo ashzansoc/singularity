@@ -182,13 +182,11 @@ export class LangExtractSidecarClient {
           api_key:
             this.config.apiKey ??
             process.env.LANGEXTRACT_API_KEY ??
-            process.env.AI_GATEWAY_API_KEY ??
             process.env.OPENAI_API_KEY ??
             process.env.GOOGLE_API_KEY,
           base_url:
             this.config.baseUrl ??
-            process.env.SINGULARITY_CONTEXT_BASE_URL ??
-            process.env.AI_GATEWAY_BASE_URL,
+            process.env.SINGULARITY_CONTEXT_BASE_URL,
         },
       };
 

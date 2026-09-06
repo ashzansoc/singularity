@@ -377,12 +377,12 @@
         "singularity.ai.localEcho": {
           "type": "boolean",
           "default": false,
-          "description": "Use local echo provider when no AI Gateway API key is available"
+          "description": "Use local echo provider when no API key is available"
         },
         "singularity.ai.gatewayBaseUrl": {
           "type": "string",
-          "default": "https://ai-gateway.vercel.sh/v1",
-          "description": "OpenAI-compatible base URL for Vercel AI Gateway (or compatible proxy)"
+          "default": "https://openrouter.ai/api/v1",
+          "description": "OpenAI-compatible base URL for OpenRouter (or compatible proxy)"
         },
         "singularity.ai.runtimeInline": {
           "type": "boolean",

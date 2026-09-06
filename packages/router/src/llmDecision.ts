@@ -92,7 +92,7 @@ export class LlmDecisionEngine {
     this.apiKey =
       config.apiKey ??
       process.env.OPENROUTER_API_KEY ??
-      process.env.AI_GATEWAY_API_KEY ??
+      process.env.TOKENROUTER_API_KEY ??
       '';
     this.baseUrl = (
       config.baseUrl ??

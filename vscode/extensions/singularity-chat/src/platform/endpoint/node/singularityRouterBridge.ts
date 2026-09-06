@@ -21,7 +21,7 @@ export interface SingularityRouteDecision {
 	readonly subTier: string;
 	readonly score: number;
 	readonly reason: string;
-	/** Preferred Vercel AI Gateway model for this sub-tier. */
+	/** Preferred OpenRouter gateway model for this sub-tier. */
 	readonly recommendedModelId: string;
 }
 
@@ -87,7 +87,7 @@ const INTENT_DEFAULT_TIER: Record<string, Tier> = {
 
 /**
  * Cost/capability-aware picker among live Singularity endpoints, aligned with
- * Singularity T0.1–T6.5 Vercel model profiles.
+ * Singularity T0.1–T6.5 OpenRouter model profiles.
  */
 export class SingularityAutoRouter {
 	route(

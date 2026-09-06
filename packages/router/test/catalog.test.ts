@@ -10,7 +10,7 @@ import {
 import { callWhenScore } from '../src/modelMatcher.js';
 import { extractFeatures } from '../src/features.js';
 
-describe('Vercel tier catalog + sub-tiers', () => {
+describe('Gateway tier catalog + sub-tiers', () => {
   it('covers every recommended model id', () => {
     expect(() => assertCatalogCoversRecommendations()).not.toThrow();
   });

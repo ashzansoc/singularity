@@ -19,9 +19,9 @@ cd singularity
 # 2. Install dependencies (npm workspaces + LangExtract sidecar venv via postinstall)
 npm install
 
-# 3. Configure inference — the model router needs at least one provider key
-cp .env.example .env
-#    then edit .env and set OPENROUTER_API_KEY (preferred — all models route through OpenRouter)
+# 3. Configure OpenRouter — one command; prompts for your API key (sk-or-…)
+npm run setup
+#    writes OPENROUTER_API_KEY to gitignored .env, then continues to launch
 #    optional: GITHUB_TOKEN (avoids GitHub 403 rate limits during built-in extension sync)
 
 # 4. Start — builds the 14 packages + singularity-ai extension, then launches the IDE
@@ -46,17 +46,17 @@ SINGULARITY_INSTALL_DIR="$HOME/Applications" bash <(curl -fsSL https://singulari
 
 The installer fetches the release manifest, downloads the `darwin-arm64`/`darwin-x64` build, and installs `Singularity.app`. If macOS blocks the unsigned app: **System Settings → Privacy & Security → Open Anyway**.
 
-### Inference via Vercel AI Gateway (BYOK)
+### Inference via OpenRouter (BYOK)
 
 One API key, many models, OpenAI-compatible:
 
-- Base URL: `https://ai-gateway.vercel.sh/v1`
-- Key via gitignored [`.env`](.env) (`AI_GATEWAY_API_KEY`) — see [`.env.example`](.env.example)
-- BYOK vendor: **Vercel AI Gateway** in the model picker
-- Auto mode uses gateway models first (no Microsoft CAPI) when the key is seeded
+- Base URL: `https://openrouter.ai/api/v1`
+- Key via gitignored [`.env`](.env) (`OPENROUTER_API_KEY`) — see [`.env.example`](.env.example)
+- BYOK vendor: **OpenRouter** in the model picker
+- Auto mode uses OpenRouter gateway models first (no Microsoft CAPI) when the key is seeded
 
 ```bash
-cp .env.example .env   # then set AI_GATEWAY_API_KEY
+npm run setup          # prompts for OPENROUTER_API_KEY (sk-or-…), writes .env
 npm start
 ```
 
@@ -78,7 +78,7 @@ Equivalent: `npm run launch` → [`scripts/launch.sh`](scripts/launch.sh).
 | [`packages/cache`](packages/cache) | Multi-layer AI I/O cache |
 | [`packages/router`](packages/router) | Intent → tier → model routing (`@singularity/router`) |
 | [`vscode/extensions/singularity-ai`](vscode/extensions/singularity-ai) | Boots the runtime on `onStartupFinished` (status bar + commands) |
-| Singularity Auto mode | Routes via Singularity; prefers **Vercel AI Gateway** models when configured |
+| Singularity Auto mode | Routes via Singularity; prefers **OpenRouter** models when configured |
 
 ## Getting started
 

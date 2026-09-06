@@ -1676,7 +1676,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 								} else {
 									const { IAutomodeService } = await import('../../../platform/endpoint/node/automodeService');
 									const automode = this._instantiationService.invokeFunction(a => a.get(IAutomodeService));
-									automode.markVercelModelRateLimited(ep.model);
+									automode.markModelRateLimited(ep.model);
 									automode.invalidateRouterCache(this.options.request);
 								}
 							} catch (e) {

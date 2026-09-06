@@ -45,6 +45,7 @@
     "perf:bench": "node benchmarks/bench-perf/check-perf.mjs",
     "typecheck:packages": "npm run typecheck -w @singularity/cache && npm run typecheck -w @singularity/prompt && npm run typecheck -w @singularity/design && npm run typecheck -w @singularity/context && npm run typecheck -w @singularity/wiki && npm run typecheck -w @singularity/router && npm run typecheck -w @singularity/runtime && npm run typecheck -w @singularity/memory && npm run typecheck -w @singularity/architecture && npm run typecheck -w @singularity/outcome && npm run typecheck -w @singularity/intelligence && npm run typecheck -w @singularity/neural-relay && npm run typecheck -w @singularity/brain",
     "install:langextract": "bash scripts/install-langextract-sidecar.sh",
+    "setup": "node scripts/setup.mjs",
     "check:integration": "node scripts/check-integration.mjs",
     "postinstall": "bash scripts/install-langextract-sidecar.sh || true",
     "install-design-refs": "bash scripts/install-design-refs.sh",

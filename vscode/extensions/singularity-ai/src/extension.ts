@@ -1547,7 +1547,7 @@ async function runComplete(): Promise<void> {
   }
 
   const prompt = await vscode.window.showInputBox({
-    prompt: 'Prompt for routed + cached completion (Vercel AI Gateway)',
+    prompt: 'Prompt for routed + cached completion (OpenRouter)',
     placeHolder: 'Explain how authentication works in this project',
   });
   if (!prompt) {
@@ -1676,7 +1676,7 @@ async function runComplete(): Promise<void> {
         ? ` ir=${result.prompt.irHash.slice(0, 8)} tokens≈${result.prompt.totalTokens}${result.prompt.fromIrCache ? ' (ir-cache)' : ''}`
         : '';
       channel.appendLine(
-        `[${result.fromCache ? `cache:${result.cacheLayer}` : 'vercel-gateway'}] model=${result.decision.model.id} intent=${result.decision.intent}${promptInfo}`,
+        `[${result.fromCache ? `cache:${result.cacheLayer}` : 'openrouter'}] model=${result.decision.model.id} intent=${result.decision.intent}${promptInfo}`,
       );
       if (result.economy) {
         const { formatEconomyMarkdown } = await import('@singularity/router');

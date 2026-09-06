@@ -97,7 +97,7 @@ interface AutoModelCacheEntry {
 	needsReEval: boolean;
 }
 
-interface VercelGatewayCacheEntry {
+interface GatewayCacheEntry {
 	endpoint: IChatEndpoint;
 	lastRoutedPrompt?: string;
 	turnCount: number;
@@ -238,9 +238,9 @@ export interface IAutomodeService {
 	invalidateRouterCache(chatRequest: IAutoModeRoutingRequest): void;
 
 	/**
-	 * Marks a Vercel model as rate-limited so the next Auto resolve rotates away from it.
+	 * Marks a model as rate-limited so the next Auto resolve rotates away from it.
 	 */
-	markVercelModelRateLimited(modelId: string): void;
+	markModelRateLimited(modelId: string): void;
 
 	/**
 	 * After a TokenRouter/BYOK 429, prefer keeping the frontend/agent owner (Pro).
@@ -253,12 +253,12 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 	readonly _serviceBrand: undefined;
 	private readonly _autoModelCache: Map<string, AutoModelCacheEntry> = new Map();
 	private readonly _autoV2Cache: Map<string, AutoV2CacheEntry> = new Map();
-	private readonly _vercelGatewayCache: Map<string, VercelGatewayCacheEntry> = new Map();
-	/** Model ids recently rate-limited on Vercel free tier; skipped until expiry. */
-	private readonly _vercelRateLimitedUntil = new Map<string, number>();
+	private readonly _gatewayCache: Map<string, GatewayCacheEntry> = new Map();
+	/** Model ids recently rate-limited on the gateway free tier; skipped until expiry. */
+	private readonly _rateLimitedUntil = new Map<string, number>();
 	/** Coalesce parallel gateway resolves for the same conversation + prompt. */
 	private readonly _inflightGatewayResolve = new Map<string, Promise<IChatEndpoint | undefined>>();
-	private static readonly VERCEL_RATE_LIMIT_COOLDOWN_MS = 60_000;
+	private static readonly RATE_LIMIT_COOLDOWN_MS = 60_000;
 	private _reserveTokens: DisposableMap<ChatLocation, AutoModeTokenBank> = new DisposableMap();
 	private readonly _routerDecisionFetcher: RouterDecisionFetcher;
 	private readonly _autoV2Fetcher: AutoV2Fetcher;
@@ -266,13 +266,13 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 	private readonly _singularityRouter = new SingularityAutoRouter();
 	private readonly _llmDecision = new OpenRouterLlmDecisionEngine((msg) => this._logService.info(msg));
 	private readonly _designSourcePlanner = new DesignSourcePlannerEngine((msg) => this._logService.info(msg));
-	/** Cached Vercel chat models — discovery can be slow; reuse across turns. */
-	private _vercelModelsCache: { models: LanguageModelChat[]; fetchedAt: number } | undefined;
-	private static readonly VERCEL_MODELS_TTL_MS = 5 * 60_000;
+	/** Cached gateway chat models — discovery can be slow; reuse across turns. */
+	private _modelsCache: { models: LanguageModelChat[]; fetchedAt: number } | undefined;
+	private static readonly MODELS_TTL_MS = 5 * 60_000;
 	/** Direct TokenRouter endpoints for Auto — avoids selectChatModels cold start. */
 	private _directAutoEndpoints: IChatEndpoint[] | undefined;
 	/** Reuse endpoint wrappers — creating one per gateway model every turn is expensive. */
-	private readonly _vercelEndpointById = new Map<string, IChatEndpoint>();
+	private readonly _endpointById = new Map<string, IChatEndpoint>();
 	private _lastRoutingDecision: AutoModeRoutingDecision | undefined;
 	/** Set on a 404 (API-version or feature-flag gate); pins us to V1. */
 	private _autoV2Unavailable = false;
@@ -307,7 +307,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			}
 			this._autoModelCache.clear();
 			this._autoV2Cache.clear();
-			this._vercelGatewayCache.clear();
+			this._gatewayCache.clear();
 			this._directAutoEndpoints = undefined;
 			// All of this is scoped to the signed-in account.
 			this._setLastAutoV2Discounts(undefined);
@@ -333,7 +333,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 		}
 		this._autoModelCache.clear();
 		this._autoV2Cache.clear();
-		this._vercelGatewayCache.clear();
+		this._gatewayCache.clear();
 		this._reserveTokens.dispose();
 		super.dispose();
 	}
@@ -432,11 +432,11 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			this._logService.trace(`[AutomodeService] Auto v2 cache invalidated for conversation ${conversationId}`);
 		}
 		// Drop sticky gateway pick so same-prompt retries can leave a rate-limited model.
-		this._vercelGatewayCache.delete(conversationId);
+		this._gatewayCache.delete(conversationId);
 	}
 
 	async resolveAutoModeEndpoint(chatRequest: IAutoModeRoutingRequest | undefined, knownEndpoints: IChatEndpoint[]): Promise<IChatEndpoint> {
-		// Singularity Auto resolves Vercel BYOK models independently of CAPI `/models`.
+		// Singularity Auto resolves OpenRouter BYOK models independently of CAPI `/models`.
 		const singularityEnabled = this._configurationService.getConfig(ConfigKey.Advanced.SingularityRouterEnabled);
 		if (!knownEndpoints.length && !singularityEnabled) {
 			throw new Error('No auto mode endpoints provided.');
@@ -453,7 +453,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				return singularity;
 			}
 			// Do not fall through to Singularity Auto — that path fails during
-			// Singularity outages and bypasses the user's Vercel gateway key.
+			// Singularity outages and bypasses the user's OpenRouter gateway key.
 			this._logService.error(
 				'[AutomodeService] Singularity Auto could not resolve a TokenRouter model.',
 			);
@@ -606,7 +606,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 	}
 
 	/**
-	 * Resolve Auto mode via the local Singularity router onto Vercel AI Gateway only.
+	 * Resolve Auto mode via the local Singularity router onto OpenRouter only.
 	 * Never falls through to Microsoft CAPI / Singularity Auto — that path fails
 	 * during Singularity outages ("Stream terminated") even when a gateway key is set.
 	 */
@@ -615,12 +615,12 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 		_knownEndpoints: IChatEndpoint[],
 	): Promise<IChatEndpoint | undefined> {
 		const conversationId = chatRequest?.sessionResource?.toString() ?? chatRequest?.sessionId ?? 'unknown';
-		// Prompt may be empty for picker / token-count paths — still pick a Vercel model.
+		// Prompt may be empty for picker / token-count paths — still pick a gateway model.
 		const prompt = chatRequest?.prompt?.trim() || '(auto)';
-		return this._tryResolveWithVercelGateway(chatRequest, conversationId, prompt);
+		return this._tryResolveWithGateway(chatRequest, conversationId, prompt);
 	}
 
-	private async _tryResolveWithVercelGateway(
+	private async _tryResolveWithGateway(
 		chatRequest: IAutoModeRoutingRequest | undefined,
 		conversationId: string,
 		prompt: string,
@@ -631,7 +631,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			this._logService.info(`[AutomodeService] coalesce gateway resolve (${conversationId.slice(0, 48)})`);
 			return existing;
 		}
-		const run = this._tryResolveWithVercelGatewayUncached(chatRequest, conversationId, prompt)
+		const run = this._tryResolveWithGatewayUncached(chatRequest, conversationId, prompt)
 			.finally(() => {
 				this._inflightGatewayResolve.delete(inflightKey);
 			});
@@ -642,15 +642,15 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 	/**
 	 * Singularity Auto routing architecture (provider-independent catalog):
 	 * Feature/Intent → Capability → Affinity → Cost → Model Selection → Execute
-	 * Pattern 1: re-route every distinct user turn. TokenRouter/Vercel = transport only.
+	 * Pattern 1: re-route every distinct user turn. TokenRouter/OpenRouter = transport only.
 	 */
-	private async _tryResolveWithVercelGatewayUncached(
+	private async _tryResolveWithGatewayUncached(
 		chatRequest: IAutoModeRoutingRequest | undefined,
 		conversationId: string,
 		prompt: string,
 	): Promise<IChatEndpoint | undefined> {
 		const routeStarted = Date.now();
-		const cache = this._vercelGatewayCache.get(conversationId);
+		const cache = this._gatewayCache.get(conversationId);
 		const samePrompt = cache?.lastRoutedPrompt === prompt && !!cache.endpoint;
 		const frontendSession = isFrontendSessionActive(conversationId);
 		const prevLiveModel = cache?.endpoint?.model ?? cache?.turnState?.modelId ?? cache?.lastCatalogModelId;
@@ -688,7 +688,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 		let segments = cache?.segments;
 
 		if (samePrompt) {
-			const until = this._vercelRateLimitedUntil.get(cache.endpoint.model) ?? 0;
+			const until = this._rateLimitedUntil.get(cache.endpoint.model) ?? 0;
 			const keepDespiteRateLimit = until > Date.now() && frontendSession;
 			if (until > Date.now() && !keepDespiteRateLimit) {
 				this._logService.warn(
@@ -889,7 +889,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			const catalogIntent = frontendPinned ? 'AGENT' : useBridge ? bridged!.decision.intent : llm.intent;
 			const catalogConf = useBridge && !frontendPinned ? bridged!.decision.intentConfidence : llm.confidence;
 
-			// 3) Map catalog → live TokenRouter/Vercel endpoints
+			// 3) Map catalog → live TokenRouter/OpenRouter endpoints
 			const prefs = expandCatalogPreferences(
 				freeTierSurrogatePreferences(catalogTier, catalogIntent, catalogWant),
 			);
@@ -899,7 +899,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				?? (frontendPinned
 					? this._matchEndpoint(knownEndpoints, forcedFrontendModel)?.model
 					: undefined)
-				?? this._pickPreferredVercelEndpoint(knownEndpoints)?.model
+				?? this._pickPreferredGatewayEndpoint(knownEndpoints)?.model
 				?? knownEndpoints[0]?.model;
 
 			let candidate: TurnRouteCandidate = {
@@ -1009,11 +1009,11 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				knownEndpoints,
 				knownEndpoints.find((e) => e.model === finalModelId)
 					?? this._matchEndpoint(knownEndpoints, finalModelId)
-					?? this._pickPreferredVercelEndpoint(knownEndpoints)
+					?? this._pickPreferredGatewayEndpoint(knownEndpoints)
 					?? knownEndpoints[0],
 			);
 
-			if (selected && this._isLikelyVercelFreeTierBlocked(selected.model)) {
+			if (selected && this._isLikelyFreeTierBlocked(selected.model)) {
 				const safe = this._resolveLiveSurrogate(
 					knownEndpoints,
 					expandCatalogPreferences(
@@ -1061,7 +1061,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				`)`,
 			);
 
-			this._vercelGatewayCache.set(conversationId, {
+			this._gatewayCache.set(conversationId, {
 				endpoint: selected!,
 				lastRoutedPrompt: prompt,
 				turnCount: turnState.turnCount,
@@ -1076,7 +1076,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			return undefined;
 		}
 
-		this._vercelGatewayCache.set(conversationId, {
+		this._gatewayCache.set(conversationId, {
 			endpoint: selected,
 			lastRoutedPrompt: prompt,
 			turnCount: turnState?.turnCount ?? (cache?.turnCount ?? 0) + (samePrompt ? 0 : 1),
@@ -1091,10 +1091,10 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 	private _endpointsForModels(models: LanguageModelChat[]): IChatEndpoint[] {
 		const out: IChatEndpoint[] = [];
 		for (const model of models) {
-			let ep = this._vercelEndpointById.get(model.id);
+			let ep = this._endpointById.get(model.id);
 			if (!ep) {
 				ep = this._instantiationService.createInstance(ExtensionContributedChatEndpoint, model);
-				this._vercelEndpointById.set(model.id, ep);
+				this._endpointById.set(model.id, ep);
 			}
 			out.push(ep);
 		}
@@ -1113,11 +1113,11 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			if (!hit) {
 				continue;
 			}
-			const until = this._vercelRateLimitedUntil.get(hit.model) ?? 0;
+			const until = this._rateLimitedUntil.get(hit.model) ?? 0;
 			if (until > now && !opts?.allowRateLimited) {
 				continue;
 			}
-			if (this._isLikelyVercelFreeTierBlocked(hit.model)) {
+			if (this._isLikelyFreeTierBlocked(hit.model)) {
 				continue;
 			}
 			return hit.model;
@@ -1155,7 +1155,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			const withoutPro = this._codingEndpoints(this._directAutoEndpoints);
 			if (withoutPro.length !== this._directAutoEndpoints.length) {
 				this._directAutoEndpoints = withoutPro.length ? withoutPro : undefined;
-				this._vercelEndpointById.clear();
+				this._endpointById.clear();
 			}
 		}
 		if (this._directAutoEndpoints?.length) {
@@ -1169,7 +1169,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			}
 			this._logService.info('[AutomodeService] Rebuilding Auto pool — DeepSeek official API is configured but cached endpoints still target TokenRouter');
 			this._directAutoEndpoints = undefined;
-			this._vercelEndpointById.clear();
+			this._endpointById.clear();
 		}
 		const started = Date.now();
 		try {
@@ -1180,7 +1180,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			);
 			if (direct.length) {
 				for (const ep of direct) {
-					this._vercelEndpointById.set(ep.model, ep);
+					this._endpointById.set(ep.model, ep);
 				}
 				this._directAutoEndpoints = direct;
 				this._logService.info(
@@ -1193,30 +1193,30 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				`[AutomodeService] Direct TokenRouter endpoints failed: ${e instanceof Error ? e.message : String(e)}`,
 			);
 		}
-		const models = await this._getVercelChatModels();
+		const models = await this._getChatModels();
 		return this._endpointsForModels(models);
 	}
 
-	private async _getVercelChatModels(): Promise<LanguageModelChat[]> {
+	private async _getChatModels(): Promise<LanguageModelChat[]> {
 		const now = Date.now();
-		if (this._vercelModelsCache && now - this._vercelModelsCache.fetchedAt < AutomodeService.VERCEL_MODELS_TTL_MS) {
-			return this._vercelModelsCache.models;
+		if (this._modelsCache && now - this._modelsCache.fetchedAt < AutomodeService.MODELS_TTL_MS) {
+			return this._modelsCache.models;
 		}
 		// Prefer stale cache forever for Auto — never block a turn on /models.
-		if (this._vercelModelsCache?.models.length) {
-			return this._vercelModelsCache.models;
+		if (this._modelsCache?.models.length) {
+			return this._modelsCache.models;
 		}
 		// Only discover once if nothing is cached; dedupe concurrent callers.
-		return this._refreshVercelChatModels();
+		return this._refreshChatModels();
 	}
 
-	private _vercelModelsRefresh: Promise<LanguageModelChat[]> | undefined;
+	private _modelsRefresh: Promise<LanguageModelChat[]> | undefined;
 
-	private async _refreshVercelChatModels(): Promise<LanguageModelChat[]> {
-		if (this._vercelModelsRefresh) {
-			return this._vercelModelsRefresh;
+	private async _refreshChatModels(): Promise<LanguageModelChat[]> {
+		if (this._modelsRefresh) {
+			return this._modelsRefresh;
 		}
-		this._vercelModelsRefresh = (async () => {
+		this._modelsRefresh = (async () => {
 			const now = Date.now();
 			const started = Date.now();
 			let models: LanguageModelChat[] = [];
@@ -1225,7 +1225,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				models = tokenrouter;
 			} catch (e) {
 				this._logService.warn(`[AutomodeService] Gateway model discovery failed: ${(e as Error).message}`);
-				return this._vercelModelsCache?.models ?? [];
+				return this._modelsCache?.models ?? [];
 			}
 			const routable = new Set(AUTO_ROUTABLE_MODEL_IDS.map((id) => id.toLowerCase()));
 			const slim = models.filter((m) => {
@@ -1245,13 +1245,13 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			// allowlisted match only — if it is empty, Auto serves nothing from
 			// this discovery path rather than a wrong model.
 			const pool = slim;
-			this._vercelModelsCache = { models: pool, fetchedAt: now };
+			this._modelsCache = { models: pool, fetchedAt: now };
 			this._logService.info(`[AutomodeService] Gateway LM catalog: ${pool.length} models (from ${models.length}) in ${Date.now() - started}ms`);
 			return pool;
 		})().finally(() => {
-			this._vercelModelsRefresh = undefined;
+			this._modelsRefresh = undefined;
 		});
-		return this._vercelModelsRefresh;
+		return this._modelsRefresh;
 	}
 
 	private _codingEndpoints(endpoints: IChatEndpoint[]): IChatEndpoint[] {
@@ -1275,7 +1275,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 		const pool = this._codingEndpoints(endpoints);
 		const flash =
 			this._matchEndpoint(pool, DEEPSEEK_FLASH_MODEL_ID)
-			?? this._pickPreferredVercelEndpoint(pool)
+			?? this._pickPreferredGatewayEndpoint(pool)
 			?? pool[0];
 		if (flash && selected && !/deepseek-v4-flash/i.test(selected.model)) {
 			this._logService.info(
@@ -1316,18 +1316,18 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 	}
 
 	/**
-	 * Prefer models that typically work on Vercel AI Gateway free tier.
+	 * Prefer models that typically work on the OpenRouter free tier.
 	 * Claude / GPT-5 / Opus are commonly 403 RestrictedModelsError without paid credits.
 	 * Skip models that recently returned free-tier 429s.
 	 */
-	private _pickPreferredVercelEndpoint(endpoints: IChatEndpoint[]): IChatEndpoint | undefined {
+	private _pickPreferredGatewayEndpoint(endpoints: IChatEndpoint[]): IChatEndpoint | undefined {
 		const now = Date.now();
 		const preference = expandCatalogPreferences([
 			'deepseek/deepseek-v4-flash-0731',
 		]);
 		const usable = (e: IChatEndpoint) => {
-			const until = this._vercelRateLimitedUntil.get(e.model) ?? 0;
-			return until <= now && !this._isLikelyVercelFreeTierBlocked(e.model);
+			const until = this._rateLimitedUntil.get(e.model) ?? 0;
+			return until <= now && !this._isLikelyFreeTierBlocked(e.model);
 		};
 		for (const id of preference) {
 			const hit = endpoints.find((e) => (e.model === id || e.model.endsWith(`/${id}`) || e.model.includes(id)) && usable(e));
@@ -1338,14 +1338,14 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 		return endpoints.find(usable);
 	}
 
-	/** Call when a Vercel Auto pick hits free-tier 429 so the next turn can rotate — keep sticky state. */
-	markVercelModelRateLimited(modelId: string): void {
-		this._vercelRateLimitedUntil.set(modelId, Date.now() + AutomodeService.VERCEL_RATE_LIMIT_COOLDOWN_MS);
+	/** Call when a gateway Auto pick hits free-tier 429 so the next turn can rotate — keep sticky state. */
+	markModelRateLimited(modelId: string): void {
+		this._rateLimitedUntil.set(modelId, Date.now() + AutomodeService.RATE_LIMIT_COOLDOWN_MS);
 		// Preserve turnState / gist so decision sticky still knows the prior Pro/frontend turn.
 		// Only clear the live endpoint pin so the next resolve re-evaluates transport.
-		for (const [key, entry] of this._vercelGatewayCache) {
+		for (const [key, entry] of this._gatewayCache) {
 			if (entry.endpoint.model === modelId || modelsEqualLoose(entry.endpoint.model, modelId)) {
-				this._vercelGatewayCache.set(key, {
+				this._gatewayCache.set(key, {
 					...entry,
 					// Keep lastRoutedPrompt so same-prompt reuse can still apply sticky Pro.
 					endpoint: entry.endpoint,
@@ -1353,17 +1353,17 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			}
 		}
 		this._logService.warn(
-			`[AutomodeService] Vercel model ${modelId} rate-limited; cooling down 60s (sticky turn state preserved).`,
+			`[AutomodeService] Gateway model ${modelId} rate-limited; cooling down 60s (sticky turn state preserved).`,
 		);
 	}
 
 	async resolveRateLimitFailover(failedModelId: string, chatRequest?: IAutoModeRoutingRequest): Promise<IChatEndpoint | undefined> {
-		this.markVercelModelRateLimited(failedModelId);
+		this.markModelRateLimited(failedModelId);
 		if (chatRequest) {
 			this.invalidateRouterCache(chatRequest);
 		}
 		const endpoints = await this._getSingularityAutoEndpoints();
-		const next = this._pickPreferredVercelEndpoint(
+		const next = this._pickPreferredGatewayEndpoint(
 			endpoints.filter((e) => !modelsEqualLoose(e.model, failedModelId)),
 		);
 		if (next) {
@@ -1374,7 +1374,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 		return next;
 	}
 
-	private _isLikelyVercelFreeTierBlocked(modelId: string): boolean {
+	private _isLikelyFreeTierBlocked(modelId: string): boolean {
 		const id = modelId.toLowerCase();
 		// TokenRouter lists deepseek-v3.2 but upstream rejects it (only v4-pro / v4-flash).
 		if (id.includes('deepseek-v3.2') || id.endsWith('/deepseek-v3.2') || id === 'deepseek-v3.2') {

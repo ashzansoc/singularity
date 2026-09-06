@@ -17,8 +17,7 @@ node benchmarks/latency-ladder/run.mjs --runs 3           # live, 3 runs per tie
 node benchmarks/latency-ladder/run.mjs --tiers A,B,C      # select tiers
 ```
 
-Auth: `.env` at repo root (`TOKENROUTER_API_KEY` / `AI_GATEWAY_*`) or
-`OPENROUTER_API_KEY`. The gateway enforces **5 requests / minute** — the harness
+Auth: `.env` at repo root (`OPENROUTER_API_KEY`, optional `TOKENROUTER_API_KEY` alias). The gateway enforces **5 requests / minute** — the harness
 paces calls 13s apart and retries once after a 65s cooldown on HTTP 429.
 A full `A,B,C` pass with N runs takes ≈ `9 × N × 13s`.
 

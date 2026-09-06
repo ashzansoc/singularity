@@ -11,9 +11,7 @@ export const OPENROUTER_DEFAULT_BASE_URL = 'https://openrouter.ai/api/v1';
 
 export const SINGULARITY_BUNDLED_ENV: Readonly<Record<string, string>> = {
 	TOKENROUTER_BASE_URL: OPENROUTER_DEFAULT_BASE_URL,
-	AI_GATEWAY_BASE_URL: OPENROUTER_DEFAULT_BASE_URL,
 	TOKENROUTER_API_KEY: '',
-	AI_GATEWAY_API_KEY: '',
 	OPENROUTER_API_KEY: '',
 	OPENROUTER_BASE_URL: OPENROUTER_DEFAULT_BASE_URL,
 	SINGULARITY_DECISION_API_KEY: '',
@@ -121,8 +119,6 @@ function getStaticEnvApiKey(): string | undefined {
 	return (
 		process.env.OPENROUTER_API_KEY?.trim()
 		|| process.env.TOKENROUTER_API_KEY?.trim()
-		|| process.env.AI_GATEWAY_API_KEY?.trim()
-		|| process.env.VERCEL_AI_GATEWAY_API_KEY?.trim()
 		|| undefined
 	);
 }
@@ -356,7 +352,6 @@ export function getTokenRouterBaseUrl(bearerToken?: string): string {
 	// Static API keys (sk-…) — prefer env override, else OpenRouter default
 	if (token && !token.startsWith('eyJ')) {
 		const fromEnv = process.env.TOKENROUTER_BASE_URL?.replace(/\/$/, '')
-			|| process.env.AI_GATEWAY_BASE_URL?.replace(/\/$/, '')
 			|| process.env.OPENROUTER_BASE_URL?.replace(/\/$/, '');
 		if (fromEnv && !/llm-proxy|supabase\.co/i.test(fromEnv)) {
 			return fromEnv;
@@ -366,7 +361,6 @@ export function getTokenRouterBaseUrl(bearerToken?: string): string {
 	return (
 		process.env.OPENROUTER_BASE_URL?.replace(/\/$/, '')
 		|| process.env.TOKENROUTER_BASE_URL?.replace(/\/$/, '')
-		|| process.env.AI_GATEWAY_BASE_URL?.replace(/\/$/, '')
 		|| OPENROUTER_DEFAULT_BASE_URL
 	);
 }

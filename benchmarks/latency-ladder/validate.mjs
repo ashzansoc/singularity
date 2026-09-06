@@ -270,11 +270,11 @@ async function sectionClassifier({ router }) {
   router.resetDecisionModelHealth();
   const apiKey =
     process.env.TOKENROUTER_API_KEY?.trim() ||
-    process.env.AI_GATEWAY_API_KEY?.trim() ||
+    process.env.OPENROUTER_API_KEY?.trim() ||
     '';
   const base = (
     process.env.TOKENROUTER_BASE_URL?.trim() ||
-    process.env.AI_GATEWAY_BASE_URL?.trim() ||
+    process.env.OPENROUTER_BASE_URL?.trim() ||
     ''
   ).replace(/\/$/, '');
   const healthyCfg = {
@@ -413,14 +413,12 @@ const FIXTURES = [
 function resolveAuth() {
   const apiKey =
     process.env.TOKENROUTER_API_KEY?.trim() ||
-    process.env.AI_GATEWAY_API_KEY?.trim() ||
     process.env.OPENROUTER_API_KEY?.trim() ||
     '';
   const base = (
     process.env.TOKENROUTER_BASE_URL?.trim() ||
-    process.env.AI_GATEWAY_BASE_URL?.trim() ||
     process.env.OPENROUTER_BASE_URL?.trim() ||
-    'https://ai-gateway.vercel.sh/v1'
+    'https://openrouter.ai/api/v1'
   ).replace(/\/$/, '');
   return { apiKey, base };
 }

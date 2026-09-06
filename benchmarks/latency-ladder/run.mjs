@@ -16,7 +16,7 @@
  *   node benchmarks/latency-ladder/run.mjs --tiers A,B,C
  *   node benchmarks/latency-ladder/run.mjs --dry      # mock transport, no network
  *
- * Auth: AI_GATEWAY_API_KEY / OPENROUTER_API_KEY (+ optional AI_GATEWAY_BASE_URL),
+ * Auth: OPENROUTER_API_KEY (+ optional OPENROUTER_BASE_URL),
  * Singularity beta auth (~/.singularity/beta-auth.json), or .env at repo root.
  */
 
@@ -311,15 +311,13 @@ async function loadRuntime() {
 function resolveAuth() {
   // .env / explicit env keys win; bundled fallbacks are last resort (may be stale).
   const apiKey =
-    process.env.TOKENROUTER_API_KEY?.trim() ||
-    process.env.AI_GATEWAY_API_KEY?.trim() ||
     process.env.OPENROUTER_API_KEY?.trim() ||
+    process.env.TOKENROUTER_API_KEY?.trim() ||
     '';
   const base = (
-    process.env.TOKENROUTER_BASE_URL?.trim() ||
-    process.env.AI_GATEWAY_BASE_URL?.trim() ||
     process.env.OPENROUTER_BASE_URL?.trim() ||
-    'https://ai-gateway.vercel.sh/v1'
+    process.env.TOKENROUTER_BASE_URL?.trim() ||
+    'https://openrouter.ai/api/v1'
   ).replace(/\/$/, '');
   return { apiKey, base };
 }
@@ -370,7 +368,6 @@ async function main() {
   const mockFetch = opts.dry ? makeMockFetch() : undefined;
   if (opts.dry) {
     // Route the provider's fetch through the mock transport.
-    process.env.AI_GATEWAY_BASE_URL = 'https://mock.local/v1';
     auth.base = 'https://mock.local/v1';
     auth.apiKey = 'mock-key';
     // Keep dry runs fully offline and unthrottled: the specialty / flash-pro /
@@ -423,7 +420,7 @@ async function main() {
 
   if (!opts.dry && !auth.apiKey) {
     console.error(
-      'No API key found (AI_GATEWAY_API_KEY / OPENROUTER_API_KEY). Use --dry for a mock run.',
+      'No API key found (OPENROUTER_API_KEY). Use --dry for a mock run.',
     );
     process.exit(1);
   }

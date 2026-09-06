@@ -82,7 +82,6 @@ function loadEnv() {
 function resolveAuth() {
   const candidates = [
     process.env.OPENROUTER_API_KEY?.trim(),
-    process.env.AI_GATEWAY_API_KEY?.trim(),
   ].filter(Boolean);
   if (candidates.length) {
     return {

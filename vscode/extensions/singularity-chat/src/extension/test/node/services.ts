@@ -219,7 +219,7 @@ class NullAutomodeService implements IAutomodeService {
 
 	invalidateRouterCache(): void { }
 
-	markVercelModelRateLimited(): void { }
+	markModelRateLimited(): void { }
 
 	async resolveRateLimitFailover(): Promise<undefined> {
 		return undefined;

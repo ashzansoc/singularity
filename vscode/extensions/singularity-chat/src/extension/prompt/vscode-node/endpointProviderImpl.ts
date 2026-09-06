@@ -140,12 +140,12 @@ export class ProductionEndpointProvider extends Disposable implements IEndpointP
 
 		if (model.id === AutoChatEndpoint.pseudoModelId) {
 			const singularityEnabled = this._configService.getConfig(ConfigKey.Advanced.SingularityRouterEnabled);
-			// Singularity Auto routes to Vercel BYOK and must not depend on CAPI `/models`.
+			// Singularity Auto routes through OpenRouter BYOK and must not depend on CAPI `/models`.
 			// During GitHub outages getAllChatEndpoints() throws; the old catch fell through
 			// to singularity-utility and produced "Stream terminated".
 			if (singularityEnabled) {
 				const endpoint = await this._autoModeService.resolveAutoModeEndpoint(requestOrFamilyOrModel as ChatRequest, []);
-				await this._rememberVercelModelForUtility(endpoint);
+				await this._rememberGatewayModelForUtility(endpoint);
 				return endpoint;
 			}
 			try {
@@ -270,7 +270,7 @@ export class ProductionEndpointProvider extends Disposable implements IEndpointP
 		const value = this._configService.getNonExtensionConfig<unknown>(ProductionEndpointProvider.BYOK_UTILITY_MODEL_DEFAULT_CONFIG_KEY);
 		switch (value) {
 			case undefined:
-				// Singularity Auto uses Vercel BYOK — keep utility calls on the same
+				// Singularity Auto uses OpenRouter BYOK — keep utility calls on the same
 				// gateway instead of CAPI (which fails during Singularity outages).
 				if (this._configService.getConfig(ConfigKey.Advanced.SingularityRouterEnabled)) {
 					return BYOKUtilityModelDefault.MainAgent;
@@ -287,8 +287,8 @@ export class ProductionEndpointProvider extends Disposable implements IEndpointP
 		}
 	}
 
-	/** When Auto resolves to a TokenRouter/Vercel model, reuse it for utility/subagent BYOK defaults. */
-	private async _rememberVercelModelForUtility(endpoint: IChatEndpoint): Promise<void> {
+	/** When Auto resolves to a TokenRouter/OpenRouter model, reuse it for utility/subagent BYOK defaults. */
+	private async _rememberGatewayModelForUtility(endpoint: IChatEndpoint): Promise<void> {
 		// Direct TokenRouter endpoints own Authorization but are not vscode.lm models.
 		if (endpoint.ownsAuthorization) {
 			const changed = this._singularityUtilityEndpoint?.model !== endpoint.model;
@@ -302,7 +302,7 @@ export class ProductionEndpointProvider extends Disposable implements IEndpointP
 			return;
 		}
 		try {
-			for (const vendor of ['tokenrouter', 'vercel'] as const) {
+			for (const vendor of ['tokenrouter'] as const) {
 				const models = await lm.selectChatModels({ vendor, id: endpoint.model });
 				const match = models[0] ?? (await lm.selectChatModels({ vendor })).find(m => m.id === endpoint.model);
 				if (!match) {
